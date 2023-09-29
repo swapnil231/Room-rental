@@ -1,0 +1,13 @@
+<div class="bwm-list-page">
+  <h1>your home all around world</h1>
+  <div class="container text-center">
+
+    <div class="row">
+      <div class="col-md-3 col-xs-6" *ngFor="let el of rental ">
+        recived:{{sendparent}}
+
+        <app-cards [rentalsend]="el"></app-cards>
+      </div>
+    </div>
+  </div>
+</div>
