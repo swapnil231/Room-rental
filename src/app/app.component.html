@@ -15,15 +15,25 @@
         <button class="btn btn-outline-primary bwm-btn-main" type="submit">Search</button>
       </form>
       <ul class="navbar-nav  mb-2 mb-lg-0">
+        <li *ngIf="authstatus" class="nav-item">
+          <a class="nav-link" aria-current="page">hellow..{{username}}</a>
+        </li>
         <li class="nav-item">
           <a class="nav-link active" routerLink="/" aria-current="page">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="login">login</a>
+        <li *ngIf="authstatus else notauthmenu" class="nav-item">
+          <a class="nav-link active" routerLink="/" aria-current="page" (click)="logout()">logout </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="register">register</a>
-        </li>
+        <ng-template #notauthmenu>
+
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" routerLink="login">login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="register">register</a>
+          </li>
+        </ng-template>
+
         <!-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Dropdown

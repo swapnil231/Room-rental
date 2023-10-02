@@ -6,11 +6,12 @@ const bcrypt=require('bcryptjs')
 const appmidl=require('../middleware/index')
 
 
+
 exports.createRegister=async(req,res)=>{
   try{
 
-  const{username,email,password,confirmPassword}=req.body
-debugger
+  const{username,email,password,conformPassword}=req.body
+
   if(!password || !email){
     return register.sendError(res,{title:'missing data',detail:'email or password missing'})
     return res.sendApiError(
@@ -19,7 +20,7 @@ debugger
       }
      )
   }
-  if(password !==confirmPassword){
+  if(password !==conformPassword){
     return register.sendError(res,{title:'invalid password',detail:'password and conFirmpassword not same'})
     return res.sendApiError(
       {
@@ -86,7 +87,7 @@ try{
    }
 
    if(findOnex){
-    authtoken(password,findOnex,res)
+    authtoken(password,email,findOnex,res)
   }
 
     }catch(err){
@@ -104,7 +105,7 @@ try{
 exports.onlyAuthUser=async(req,res,next)=>{
 
 try{
-  debugger
+
      const token =req.headers.authorization
 
      if(!token){
@@ -186,7 +187,7 @@ function notAuthorised(res){
 
 }
 
-async function authtoken(password,findOnex,res){
+async function authtoken(password,email,findOnex,res){
   try{
    const x = await bcrypt.compare(password, findOnex.password)
 
@@ -196,8 +197,24 @@ async function authtoken(password,findOnex,res){
      username:findOnex.username,
      },config.JWT_SECRET,{expiresIn:"2h"
      })
-     return res.json(token)
-    }
+     const findlogin= await login.findOne({email})
+
+   if(!findlogin){
+
+       const newlogin=new login({email,password})
+
+       const creatlogin=await newlogin.save()
+
+
+       if(creatlogin){
+       return res.json({token:token, message:`new user is login with id ${creatlogin._id}`})
+        }
+      }
+
+      if(findlogin){
+        return res.json({token:token,message:'token send'})
+      }
+ }
    if(x===false){
     return register.sendError(res,{title:'password error',detail:'password is wrong'})
     return res.sendApiError(
@@ -208,6 +225,7 @@ async function authtoken(password,findOnex,res){
     }
 
   }catch(err){
+    console.log('hiiii')
     //  return res.status(422).send({errors:[{title:'DB Error', detail:'oops something wrong'}]})
     return register.sendError(res,{title:'DB Error',detail:'oops something wrong'})
    }

@@ -8,12 +8,14 @@ import { RentalccComponent } from './rentalcc/rentalcc.component';
 import { SharedModule } from '../shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { SupersecretComponent } from './supersecret/supersecret.component';
 
 @NgModule({
   declarations: [
     RentalDetailsComponent,
     RentalListingComponent,
     RentalccComponent,
+    SupersecretComponent,
   ],
   imports: [
     CommonModule,

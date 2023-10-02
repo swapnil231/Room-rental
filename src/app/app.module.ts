@@ -8,6 +8,7 @@ import { SharedModule } from './shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { Auth2Module } from './auth2/auth2.module';
 import { AuthModule } from './auth/auth.module';
+// import {} from './shared/routerquarypara,/index.d.ts/index';
 
 @NgModule({
   declarations: [AppComponent],

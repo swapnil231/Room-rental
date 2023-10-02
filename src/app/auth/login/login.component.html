@@ -3,9 +3,12 @@
     <div class="row">
       <div class="col-md-5">
         <h1>Login</h1>
-        <!-- <div *ngIf="notifyMessage" class="alert alert-success">
-          Some message
-        </div> -->
+        <div *ngIf="notifyMessage" class="alert alert-success">
+          {{notifyMessage}}
+        </div>
+        <div *ngIf="loginMessage" class="alert alert-success">
+          {{loginMessage}}
+        </div>
         <form [formGroup]="loginform">
           <div class="form-group">
             <label for="email">Email</label>
@@ -23,7 +26,7 @@
               </div>
             </div>
           </div>
-          <div class="form-group">
+          <div class="form-group mb-1">
             <label for="password">Password</label>
             <input type="password" class="form-control" formControlName="password" id="password">
           </div>
@@ -41,12 +44,18 @@
 
           <button [disabled]="loginform.invalid" (click)="login()" type="submit"
             class="btn bwm-btn-main">Submit</button>
+          <button *ngIf="errror" (click)="clear()" type="button" class="btn bwm-btn-main m-lg-1">clear</button>
         </form>
         <!-- <div *ngIf="errors.length > 0" class="alert alert-danger">
           <p *ngFor="let error of errors">
             {{error.detail}}
           </p>
         </div> -->
+        <div *ngIf="errror" class="alert alert-danger">
+          <p>
+            {{errror}}
+          </p>
+        </div>
       </div>
       <div class="col-md-6 ml-auto">
         <div class="image-container">

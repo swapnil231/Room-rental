@@ -37,16 +37,19 @@
 
           <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" #password="ngModel" required [(ngModel)]="registerform.password" class="form-control"
-              name="password" id="password">
+            <input type="password" #password="ngModel" required minlength="6" [(ngModel)]="registerform.password"
+              class="form-control" name="password" id="password">
             <div class="alert alert-danger" *ngIf="!password.pristine && password.invalid">
               <div *ngIf="password.errors?.['required']">
                 password is required.
               </div>
+              <div *ngIf="password.errors?.['minlength']">
+                minimumlenght 6 is required.
+              </div>
             </div>
           </div>
 
-          <div class="form-group">
+          <div class="form-group mb-1">
             <label for="passwordConfirmation">Confirm Password</label>
             <input type="password" #confirmPassword="ngModel" required [(ngModel)]="registerform.conformPassword"
               class="form-control" id="passwordConfirmation" name="confirmPassword">
@@ -61,12 +64,19 @@
           </div>
           <button [disabled]="RegisterForm.invalid" type="submit" class="btn bwm-btn-main"
             (click)="register(RegisterForm)">Submit</button>
+          <button *ngIf="error" type="button" class="btn bwm-btn-main m-lg-1"
+            (click)="clear(RegisterForm)">Clear</button>
         </form>
         <!-- <div class="alert alert-danger">
           <p *ngFor="let error of errors">
             {{error.detail}}
           </p>
         </div> -->
+        <div class="alert alert-danger" *ngIf="error">
+          <p>
+            {{error}}
+          </p>
+        </div>
       </div>
       <div class="col-md-6 ml-auto">
         <div class="image-container">
