@@ -6,6 +6,7 @@ import { RentalDetailsComponent } from './rental-details/rental-details.componen
 import { RentalccComponent } from './rentalcc/rentalcc.component';
 import { SupersecretComponent } from './supersecret/supersecret.component';
 import { authguardGuard } from '../auth/guard/authguard.guard';
+import { RentalNewComponent } from './rental-new/rental-new.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,11 @@ const routes: Routes = [
       {
         path: 'super',
         component: SupersecretComponent,
+        canActivate: [authguardGuard],
+      },
+      {
+        path: 'new',
+        component: RentalNewComponent,
         canActivate: [authguardGuard],
       },
       {

@@ -12,7 +12,9 @@ const rentalSchema=new Schema({
     numOfRooms: {type:Number,required:true},
     description: {type:String,required:true},
     dailyPrice:{type:Number,required:true},
-    shared:Boolean,
+    shared:String,
+    owner:{type:Schema.ObjectId,ref:'Register'},
+
     createdAt:{type:Date,default:Date.now},
 
 })
@@ -32,3 +34,5 @@ rentalSchema.methods.sendError=function(res,config){
   }
 
 module.exports=mongoose.model('Rental',rentalSchema)
+
+

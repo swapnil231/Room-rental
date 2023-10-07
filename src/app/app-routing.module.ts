@@ -15,18 +15,18 @@ const routes: Routes = [
     canActivate: [GuestguardGuard],
   },
 
-  {
-    path: 'rental/super',
-    component: SupersecretComponent,
-    canActivate: [authguardGuard],
-    pathMatch: 'full',
-  },
-  {
-    path: '**',
-    component: RentalListingComponent,
+  // {
+  //   path: 'rental/super',
+  //   component: SupersecretComponent,
+  //   canActivate: [authguardGuard],
+  //   pathMatch: 'full',
+  // },
+  // {
+  //   path: '**',
+  //   component: RentalListingComponent,
 
-    pathMatch: 'full',
-  },
+  //   pathMatch: 'full',
+  // },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

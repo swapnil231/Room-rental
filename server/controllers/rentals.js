@@ -2,6 +2,7 @@
 
 
 
+const { ObjectId } = require('mongodb')
 const Rental=require('../models/rental')
 
 exports.getRentals=async (req,res)=>{
@@ -31,6 +32,7 @@ exports.getRentalsById=async (req,res)=>{
 exports.creatRentals=async(req,res)=>{
  try{
     const rentalData=req.body
+    rentalData.owner=res.locals.user
     const newRental=new Rental(rentalData)
 
     const creatRental= await newRental.save()
@@ -40,7 +42,7 @@ exports.creatRentals=async(req,res)=>{
     }
 
    } catch(err){
-      return new Rental().sendError(res,{status:422,detail:'cant retrive  post data'})
+      return new Rental().sendError(res,{status:422,detail:'cant retrive post data'})
     // return res.status(422).send({
     //   errors:[{title:'Rental Error!',message:'cannot retrive Rental data'}]
     //  })
@@ -64,5 +66,42 @@ exports.updateRentals=(req,res)=>{
   rentals[rentalIndex].title=rentalToupdate.title
 
   return res.json({message:`rental with id:${rentalId} is updated`})
+
+}
+
+
+// middlewear
+exports.isuserRentalowner=async(req,res,next)=>{
+  try{
+
+  const{rental}=req.body
+  console.log("im middlewaere")
+  const user=res.locals.user
+
+  if(!rental){
+    return new Rental().sendError(res,{status:422,detail:'cant make booking on undefined rental'})
+  }
+  const findrentalid=  await Rental.findById(rental)
+  console.log("im middlewaere")
+
+  const populaterental= await findrentalid.populate('owner')
+  console.log('im middlewearx')
+  const ownerid=populaterental.owner.id
+  console.log('im middleweary')
+if(ownerid==user.id){
+    console.log("im middlewaere2")
+    return new Rental().sendError(res,{status:422,detail:'cant creat booking on your own rentals'})
+
+  }
+  console.log('im middlewear3')
+    next()
+
+
+
+
+  }catch(err){
+    return new Rental().sendError(res,{status:422,detail:'oops something went wrong'})
+
+  }
 
 }

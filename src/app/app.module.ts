@@ -8,7 +8,9 @@ import { SharedModule } from './shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { Auth2Module } from './auth2/auth2.module';
 import { AuthModule } from './auth/auth.module';
-// import {} from './shared/routerquarypara,/index.d.ts/index';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './auth/shared/interceptor/token.interceptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,8 +22,11 @@ import { AuthModule } from './auth/auth.module';
     FormsModule,
     Auth2Module,
     AuthModule,
+    BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

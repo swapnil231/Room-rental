@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
           },
           queryParamsHandling: 'merge',
         });
-      }, 10000);
+      }, 500);
     });
   }
 

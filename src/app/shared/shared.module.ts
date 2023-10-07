@@ -6,6 +6,7 @@ import { UppercasefirstLetterPipe } from './uppercasefirst-letter.pipe';
 import { HighlightDirective } from './highlight.directive';
 import { ForbiddenemailDirective } from './directive/forbiddenemail.directive';
 import { SameAsDirective } from './directive/same-as.directive';
+import { MapModule } from './map/map.module';
 
 @NgModule({
   declarations: [
@@ -15,13 +16,14 @@ import { SameAsDirective } from './directive/same-as.directive';
     ForbiddenemailDirective,
     SameAsDirective,
   ],
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, MapModule],
   exports: [
     CardsComponent,
     UppercasefirstLetterPipe,
     HighlightDirective,
     ForbiddenemailDirective,
     SameAsDirective,
+    MapModule,
   ],
 })
 export class SharedModule {}

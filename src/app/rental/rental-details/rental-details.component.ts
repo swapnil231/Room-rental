@@ -5,6 +5,7 @@ import { Rental } from 'src/app/shared/rental-modal';
 import { Form } from '@angular/forms';
 import { UppercasefirstLetterPipe } from 'src/app/shared/uppercasefirst-letter.pipe';
 import { HighlightDirective } from 'src/app/shared/highlight.directive';
+import { AuthService } from 'src/app/auth/shared/service/auth.service';
 
 @Component({
   selector: 'app-rental-details',
@@ -17,6 +18,14 @@ export class RentalDetailsComponent implements OnInit {
   bgColor = 'pink';
   rental!: Rental;
   value = 'ram';
+  auth: any;
+
+  constructor(
+    private activated_route: ActivatedRoute,
+    private rental_service: RentalistingService,
+    private authservuce: AuthService
+  ) {}
+
   ngOnInit(): void {
     this.activated_route.params.subscribe((params) => {
       this.param = params['rentalid'];
@@ -25,10 +34,6 @@ export class RentalDetailsComponent implements OnInit {
         console.log(this.rental);
       });
     });
+    this.auth = this.authservuce.isauthenticated;
   }
-
-  constructor(
-    private activated_route: ActivatedRoute,
-    private rental_service: RentalistingService
-  ) {}
 }
