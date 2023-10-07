@@ -1,0 +1,167 @@
+<section id="newRental">
+  <div class="bwm-form">
+    <div class="row">
+      <div class="col-md-5">
+        <h1 class="page-title">Create Rental</h1>
+        <div *ngIf="sucessMessage" class="alert alert-success">
+          {{sucessMessage}}
+        </div>
+        <form [formGroup]="creatrental">
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" formControlName="title">
+
+            <div class="alert alert-danger" *ngIf="title?.invalid && !title?.pristine">
+              <div *ngIf="title?.errors?.['required']">
+                title is required.
+
+              </div>
+              <div *ngIf="title?.errors?.['maxlength']">
+                maxlength of characters is 20
+
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="city">City</label>
+            <input type="text" class="form-control" id="city" formControlName="city">
+            <div class="alert alert-danger" *ngIf="city?.invalid && !city?.pristine">
+              <div *ngIf="city?.errors?.['required']">
+                city is required.
+
+              </div>
+              <div *ngIf="city?.errors?.['maxlength']">
+                maxlength of characters is 10
+
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="street">Street</label>
+            <input type="text" class="form-control" id="street" formControlName="street">
+            <div class="alert alert-danger" *ngIf="street?.invalid && !street?.pristine">
+              <div *ngIf="street?.errors?.['required']">
+                street is required.
+
+              </div>
+              <div *ngIf="street?.errors?.['maxlength']">
+                maxlength of characters is 50
+
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="category">Category</label>
+
+            <select class="form-control" id="category" formControlName="category">
+              <option *ngFor="let category of rentalCategories"> {{category}} </option>
+
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="bedrooms">Image Url</label>
+            <input class="form-control" id="image" formControlName="image">
+            <div class="alert alert-danger" *ngIf="image?.invalid && !image?.pristine">
+              <div *ngIf="image?.errors?.['required']">
+                image is required.
+
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="bedrooms">Rooms</label>
+            <input type="number" class="form-control" id="numOfRooms" formControlName="numOfRooms">
+            <div class="alert alert-danger" *ngIf="numOfRooms?.invalid && !numOfRooms?.pristine">
+              <div *ngIf="numOfRooms?.errors?.['required']">
+                numOfRooms is required.
+
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea rows="5" type="text" class="form-control" id="description" formControlName="description">
+            </textarea>
+            <div class="alert alert-danger" *ngIf="description?.invalid && !description?.pristine">
+              <div *ngIf="description?.errors?.['required']">
+                description is required.
+
+              </div>
+              <div *ngIf="title?.errors?.['maxlength']">
+                maxlength of characters is 20
+
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="dailyRate">Daily Price</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">$</div>
+              </div>
+              <input type="number" class="form-control" id="dailyPrice" formControlName="dailyPrice">
+            </div>
+            <div class="alert alert-danger" *ngIf="dailyPrice?.invalid && !dailyPrice?.pristine">
+              <div *ngIf="dailyPrice?.errors?.['required']">
+                dailyprice is required.
+
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="text" class="form-control" id="phone" formControlName="phone">
+            <div class="alert alert-danger" *ngIf="phone?.invalid && !phone?.pristine">
+              <div *ngIf="phone?.errors?.['required']">
+                phone is required.
+
+              </div>
+            </div>
+          </div> -->
+
+          <!-- <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+            <label class="form-check-label" for="flexCheckChecked">
+              Checked checkbox
+            </label>
+          </div> -->
+
+          <div class="form-check mt-2 mb-2">
+            <label for="shared">Shared</label>
+            <input type="checkbox" class="form-check-input" id="shared" value=" " formControlName="shared">
+
+            <div class="alert alert-danger" *ngIf="shared?.invalid && !shared?.pristine">
+              <div *ngIf="shared?.errors?.['required']">
+                shared value is required.
+
+              </div>
+            </div>
+          </div>
+          <button type="button" (click)="submit()" class="btn bwm-btn-main">Create
+          </button>
+
+          <div *ngIf="errorx" class="alert alert-danger">
+            <p>
+              'oops something went wrong'
+            </p>
+          </div>
+        </form>
+
+      </div>
+      <div class="col-md-6 ml-auto">
+        <div class="image-container">
+          <h2 class="catchphrase">Hundreds of awesome places in reach of few clicks.</h2>
+          <img src="assets/images/create-rental.jpg" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

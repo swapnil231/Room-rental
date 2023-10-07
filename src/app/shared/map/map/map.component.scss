@@ -1,0 +1,16 @@
+@import "@tomtom-international/web-sdk-maps";
+
+#map {
+  height: 60vh;
+  width: 40vw;
+}
+
+.marker{
+  width: 120px;
+  height:120px ;
+  margin-top: 60px;
+  border-radius: 50%;
+  background-color: red;
+  opacity: 0.3;
+
+}
