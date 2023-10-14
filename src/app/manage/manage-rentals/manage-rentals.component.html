@@ -1,0 +1,31 @@
+<!-- <p>manage-rentals works!</p> -->
+
+
+<div class="bwm-list-page">
+  <h1>your rentals</h1>
+  <div class="container text-center">
+
+    <p *ngIf="rental.length === 0 && !isFetching" class="alert alert-warning">
+      No rentals found
+    </p>
+
+
+    <!-- </div> -->
+
+    <div class="row">
+      <div class="col-md-3 col-xs-12" *ngFor="let el of rental ">
+        <app-cards [rentalsend]="el"></app-cards>
+
+        <div class="d-inline-flex">
+
+          <button class="btn btn-danger" (click)="deleterental(el._id)">delete</button>
+
+          <button class="btn btn-primary " (click)="Edit(el._id)">Edit</button>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

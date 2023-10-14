@@ -1,0 +1,61 @@
+<div class="editable-input" *ngIf="htmltagtype=='input'">
+  <input *ngIf="isinputactive" [type]="type" [(ngModel)]="entity[field]" [class]="classname" (keydown.escape)="cancle()"
+    (keydown.enter)="entityupdate()">
+  <span *ngIf="!isinputactive" [class]="classname"> {{entity[field]}}</span>
+  <span class="btn-container">
+    <button *ngIf="!isinputactive" (click)="isinputactive =true"
+      class="btn btn-small btn-primary btn-editable m-2">edit</button>
+    <button *ngIf="isinputactive" class="btn btn-small btn-success btn-editable m-2"
+      (click)="entityupdate()">save</button>
+    <button *ngIf="isinputactive" (click)="cancle()" class="btn btn-small btn-danger btn-editable">cancle</button>
+
+  </span>
+</div>
+
+<div class="editable-input" *ngIf="htmltagtype=='textarea'">
+  <textarea name="" id="" cols="30" rows="10" *ngIf="isinputactive" [(ngModel)]="entity[field]" [class]="classname"
+    (keydown.escape)="cancle()" (keydown.enter)="entityupdate()"></textarea>
+  <!-- <input > -->
+  <span *ngIf="!isinputactive" [class]="classname"> {{entity[field]}}</span>
+  <span class="btn-container">
+    <button *ngIf="!isinputactive" (click)="isinputactive =true"
+      class="btn btn-small btn-primary btn-editable m-2">edit</button>
+    <button *ngIf="isinputactive" class="btn btn-small btn-success btn-editable m-2"
+      (click)="entityupdate()">save</button>
+    <button *ngIf="isinputactive" (click)="cancle()" class="btn btn-small btn-danger btn-editable">cancle</button>
+
+  </span>
+</div>
+
+<div class="editable-input" *ngIf="htmltagtype=='image'">
+  <img name="" id="" cols="30" rows="10" *ngIf="isinputactive" [(ngModel)]="entity[field]" [class]="classname"
+    (keydown.escape)="cancle()" (keydown.enter)="entityupdate()">
+  <!-- <input > -->
+  <span *ngIf="!isinputactive" [class]="classname"> {{entity[field]}}</span>
+  <span class="btn-container">
+    <button *ngIf="!isinputactive" (click)="isinputactive =true"
+      class="btn btn-small btn-primary btn-editable m-2">edit</button>
+    <button *ngIf="isinputactive" class="btn btn-small btn-success btn-editable m-2"
+      (click)="entityupdate()">save</button>
+    <button *ngIf="isinputactive" (click)="cancle()" class="btn btn-small btn-danger btn-editable">cancle</button>
+
+  </span>
+</div>
+
+<div class="editable-input" *ngIf="htmltagtype=='select'">
+
+  <select name="" id="" *ngIf="isinputactive" [(ngModel)]="entity[field]" [class]="classname">
+    <option [selected]="entity[field]===undefined" disabled>--------</option>
+    <option value="" *ngFor="let el of option" [ngValue]="el">{{el}}</option>
+  </select>
+  <!-- <input > -->
+  <span *ngIf="!isinputactive" [class]="classname"> {{entity[field]}}</span>
+  <span class="btn-container">
+    <button *ngIf="!isinputactive" (click)="isinputactive =true"
+      class="btn btn-small btn-primary btn-editable m-2">edit</button>
+    <button *ngIf="isinputactive" class="btn btn-small btn-success btn-editable m-2"
+      (click)="entityupdate()">save</button>
+    <button *ngIf="isinputactive" (click)="cancle()" class="btn btn-small btn-danger btn-editable">cancle</button>
+
+  </span>
+</div>

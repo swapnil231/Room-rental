@@ -1,0 +1,12 @@
+<div>
+
+
+
+  <img class="img" *ngIf="istrue" [src]="rental.image.url" style="height: 60vh; width:auto; " alt="">
+  <img class="img" *ngIf="!istrue" [src]="selectedimage.src" style="height: 60vh; width:auto;" alt="">
+
+</div>
+
+
+<app-image [istruevalue]="istrue" (istruefromchid)="attachMethod($event)" (imageUploaded)="attachImageToRental($event)"
+  (selet)="selectedImag($event)"></app-image>

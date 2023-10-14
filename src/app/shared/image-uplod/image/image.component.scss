@@ -1,0 +1,49 @@
+.img-preview-container {
+  // background-color: #f7f7f7;
+  height: 116px;
+
+
+  position: relative;
+  margin: 0px;
+
+  .img-loading-overlay {
+    padding: 20px;
+  }
+
+
+  .spinner-container {
+    position: absolute;
+    margin-top: -80px;
+    margin-left: 80px;
+  }
+
+  .img-preview {
+    background: center center no-repeat;
+    background-size: contain;
+    height: 116px;
+    position: relative;
+    width: auto;
+
+    &-error {
+      height: 0;
+    }
+
+    img {
+      height: 100%;
+    }
+  }
+}
+input{
+  display: none;
+}
+.blur{
+  filter: blur(10px);
+  // z-index: -1;
+}
+image-cropper{
+    height: 400px;
+}
+
+.error{
+  height: 0px;
+}

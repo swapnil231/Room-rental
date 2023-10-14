@@ -1,0 +1,36 @@
+<section id="userBookings">
+  <h1 class="page-title">{{title}}</h1>
+
+  <p *ngIf="booking.length === 0 && !isFetching" class="alert alert-warning">
+    No booking found
+  </p>
+
+  <div class="row">
+    <ng-container *ngIf="booking">
+      <!-- Iterate bookings -->
+      <div class="col-md-4">
+        <div class="card text-center" *ngFor="let el of booking">
+          <!-- Only if type === 'received' -->
+          <div class="card-header">
+            From: {{el.user.username}}
+          </div>
+          <div class="card-block">
+            <ng-container>
+              <h4 class="card-title">{{el.rental.title}} - {{el.rental.city}}</h4>
+            </ng-container>
+            <p class="card-text booking-days">
+              {{el.startAt |timeFormat}} - {{el.endAt |timeFormat}} | {{el.nights}} nights
+            </p>
+            <p class="card-text"><span>Price: </span> <span class="booking-price-value">{{el.price}}</span></p>
+            <a class="btn bwm-btn-main">Go to Rental</a>
+            <button class="ml-1 btn btn-danger" *ngIf="type === 'all'" (click)="deleteRecivedBooking(el._id)">Delete
+            </button>
+          </div>
+          <div class="card-footer text-muted">
+            createdAt : {{el.createdAt |timeFormat}}
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</section>
