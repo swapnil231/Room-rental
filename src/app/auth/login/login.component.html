@@ -1,0 +1,68 @@
+<section id="login">
+  <div class="bwm-form">
+    <div class="row">
+      <div class="col-md-5">
+        <h1>Login</h1>
+        <div *ngIf="notifyMessage" class="alert alert-success">
+          {{notifyMessage}}
+        </div>
+        <div *ngIf="loginMessage" class="alert alert-success">
+          {{loginMessage}}
+        </div>
+        <form [formGroup]="loginform">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input formControlName="email" type="email" class="form-control" id="email">
+            <div class="alert alert-danger" *ngIf="email?.invalid && !email?.pristine">
+              <div *ngIf="email?.errors?.['required']">
+                Email is required.
+
+              </div>
+              <div *ngIf="email?.errors?.['pattern']">
+                Must be valid email format!
+              </div>
+              <div *ngIf="email?.errors?.['forbiddenEmail']">
+                this email not allowed!
+              </div>
+            </div>
+          </div>
+          <div class="form-group mb-1">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" formControlName="password" id="password">
+          </div>
+          <div class="alert alert-danger" *ngIf="password?.invalid && !password?.pristine">
+            <div *ngIf="password?.errors?.['required']">
+              password is required.
+            </div>
+            <div *ngIf="password?.errors?.['minlength']">
+              Must be minlenght of 6!
+            </div>
+          </div>
+          <div class="alert alert-danger" *ngIf="loginform.errors?.['sameAs'] && !password?.pristine">
+            passord and email dont match
+          </div>
+
+          <button [disabled]="loginform.invalid" (click)="login()" type="submit"
+            class="btn bwm-btn-main">Submit</button>
+          <button *ngIf="errror" (click)="clear()" type="button" class="btn bwm-btn-main m-lg-1">clear</button>
+        </form>
+        <!-- <div *ngIf="errors.length > 0" class="alert alert-danger">
+          <p *ngFor="let error of errors">
+            {{error.detail}}
+          </p>
+        </div> -->
+        <div *ngIf="errror" class="alert alert-danger">
+          <p>
+            {{errror}}
+          </p>
+        </div>
+      </div>
+      <div class="col-md-6 ml-auto">
+        <div class="image-container">
+          <h2 class="catchphrase">Hundreds of awesome places in reach of few clicks.</h2>
+          <img src="assets/images/login-image.jpg" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

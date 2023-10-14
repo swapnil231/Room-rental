@@ -1,0 +1,16 @@
+<a routerLink="/rental/{{rentalsend._id}}">
+
+  <div class="card bwm-card">
+    <img [src]="rentalsend.image" class="card-img-top" alt="...">
+    <div class="card-block">
+      <h6 class="card-subtitle type-{{rentalsend.category}}"> whole {{rentalsend.category}} - {{rentalsend.city}}</h6>
+      <h4 class="card-title">{{rentalsend.title}}</h4>
+
+      <p class="card-text">
+        {{rentalsend.dailyPrice}} per night - free cancellation
+      </p>
+      <a (click)="onsend()" class="btn btn-primary">Go</a>
+
+    </div>
+  </div>
+</a>

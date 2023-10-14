@@ -1,0 +1,29 @@
+
+@import 'color';
+
+.navbar-brand {
+  font-size:30px;
+  color: rgb(253, 100, 100);
+  text-decoration: none;
+  white-space: nowrap;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+.bwm-serch{
+
+  height: 50px;
+  width: 300px;
+}
+
+// .bwm-btn-main{
+//   border-color: $dark-red-color ;
+//   color: $dark-red-color ;
+
+//   &:hover,&:active,&:focus-visible{
+//     color:white;
+//     background-color:$dark-red-color;
+//     border-color: $dark-red-color
+
+//   }
+// }

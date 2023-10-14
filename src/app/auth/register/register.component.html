@@ -1,0 +1,89 @@
+<section id="register">
+  <div class="bwm-form">
+    <div class="row">
+      <div class="col-md-5">
+        <h1 class="page-title">Register</h1>
+        <form #RegisterForm="ngForm" [appSameAs]="['password','confirmPassword']">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input #username="ngModel" required minlength="4" [(ngModel)]="registerform.username" name="username"
+              type="text" class="form-control" id="username">
+            <div class="alert alert-danger" *ngIf="!username.pristine && username.invalid">
+              <div *ngIf="username.errors?.['required']">
+                Username is required.
+              </div>
+              <div *ngIf="username.errors?.['minlength']">
+                Username atleast 4 charactors
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input #email="ngModel" [appForbiddenemail]="'yahoo@gmail.com'" required [pattern]="emailPattern"
+              [(ngModel)]="registerform.email" type="email" class="form-control" name="email" id="email">
+            <div class="alert alert-danger" *ngIf="!email.pristine && email.invalid">
+              <div *ngIf="email.errors?.['required']">
+                email is required.
+              </div>
+              <div *ngIf="email.errors?.['pattern']">
+                email format is invalid
+              </div>
+              <div *ngIf="email.errors?.['forbiddenEmail']">
+                this email is forbidden
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" #password="ngModel" required minlength="6" [(ngModel)]="registerform.password"
+              class="form-control" name="password" id="password">
+            <div class="alert alert-danger" *ngIf="!password.pristine && password.invalid">
+              <div *ngIf="password.errors?.['required']">
+                password is required.
+              </div>
+              <div *ngIf="password.errors?.['minlength']">
+                minimumlenght 6 is required.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group mb-1">
+            <label for="passwordConfirmation">Confirm Password</label>
+            <input type="password" #confirmPassword="ngModel" required [(ngModel)]="registerform.conformPassword"
+              class="form-control" id="passwordConfirmation" name="confirmPassword">
+          </div>
+          <div class="alert alert-danger" *ngIf="!confirmPassword.pristine && confirmPassword.invalid">
+            <div *ngIf="confirmPassword.errors?.['required']">
+              confirm password is required.
+            </div>
+          </div>
+          <div class="alert alert-danger" *ngIf="RegisterForm.errors?.['sameAs'] && !confirmPassword.pristine">
+            password and confirm password must be same
+          </div>
+          <button [disabled]="RegisterForm.invalid" type="submit" class="btn bwm-btn-main"
+            (click)="register(RegisterForm)">Submit</button>
+          <button *ngIf="error" type="button" class="btn bwm-btn-main m-lg-1"
+            (click)="clear(RegisterForm)">Clear</button>
+        </form>
+        <!-- <div class="alert alert-danger">
+          <p *ngFor="let error of errors">
+            {{error.detail}}
+          </p>
+        </div> -->
+        <div class="alert alert-danger" *ngIf="error">
+          <p>
+            {{error}}
+          </p>
+        </div>
+      </div>
+      <div class="col-md-6 ml-auto">
+        <div class="image-container">
+          <h2 class="catchphrase">As our member you have access to most awesome places in the world.</h2>
+          <img src="assets/images/register-image.jpg" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

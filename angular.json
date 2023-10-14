@@ -25,14 +25,21 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/scsss"
+              ]
+            },
             "assets": [
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/font-awesome/css/font-awesome.min.css"
+
             ],
-            "scripts": []
+            "scripts": [ ]
           },
           "configurations": {
             "production": {
@@ -68,7 +75,8 @@
               "browserTarget": "roonrental:build:production"
             },
             "development": {
-              "browserTarget": "roonrental:build:development"
+              "browserTarget": "roonrental:build:development",
+              "proxyConfig": "proxy.conf.json/proxy.config.json"
             }
           },
           "defaultConfiguration": "development"
