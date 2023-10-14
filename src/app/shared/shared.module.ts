@@ -7,6 +7,13 @@ import { HighlightDirective } from './highlight.directive';
 import { ForbiddenemailDirective } from './directive/forbiddenemail.directive';
 import { SameAsDirective } from './directive/same-as.directive';
 import { MapModule } from './map/map.module';
+import { FirstletterPipe } from './pipe/firstletter.pipe';
+
+import { TimeFormatPipe } from './pipe/time-format/time-format.pipe';
+import { EditableModule } from './editable/editable.module';
+import { ImageUplodModule } from './image-uplod/image-uplod.module';
+import { SpinnerModule } from './spinner/spinner.module';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({
   declarations: [
@@ -15,8 +22,11 @@ import { MapModule } from './map/map.module';
     HighlightDirective,
     ForbiddenemailDirective,
     SameAsDirective,
+    FirstletterPipe,
+
+    TimeFormatPipe,
   ],
-  imports: [CommonModule, RouterModule, MapModule],
+  imports: [CommonModule, RouterModule, MapModule, ImageCropperModule],
   exports: [
     CardsComponent,
     UppercasefirstLetterPipe,
@@ -24,6 +34,11 @@ import { MapModule } from './map/map.module';
     ForbiddenemailDirective,
     SameAsDirective,
     MapModule,
+    FirstletterPipe,
+    TimeFormatPipe,
+    EditableModule,
+    ImageUplodModule,
+    SpinnerModule,
   ],
 })
 export class SharedModule {}

@@ -17,11 +17,11 @@
     <p>Price: <em>${{bookingdata.price}}</em></p>
     <p>Do you confirm booking for selected days?</p>
   </div>
-  <!-- <div *ngIf="errors.length > 0" class="alert alert-danger modal-error">
-  <p *ngFor="let error of errors">
-    {{error.detail}}
-  </p>
-</div> -->
+  <!-- <div *ngIf="errors" class="alert alert-danger modal-error">
+    <p>
+      {{errors}}
+    </p>
+  </div> -->
   <hr style="color: red;">
   <div class="modal-footer">
     <button type="button" class="btn bwm-btn-main" (click)="confirmbooking()">Confirm</button>

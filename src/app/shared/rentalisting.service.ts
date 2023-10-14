@@ -16,6 +16,12 @@ export class RentalistingService {
     return this.http.get<Rental[]>(`http://localhost:4200/api/v1/rentals`);
   }
 
+  getRentalsbycity(city: string): Observable<Rental[]> {
+    return this.http.get<Rental[]>(
+      `http://localhost:4200/api/v1/rentals?city=${city}`
+    );
+  }
+
   getrentaldetails(rentalId: any): Observable<Rental> {
     return this.http.get<Rental>(
       `http://localhost:4200/api/v1/rentals/${rentalId}`
@@ -40,14 +46,37 @@ export class RentalistingService {
 
   private bookingdata = new BehaviorSubject<any>(0);
   cast = this.bookingdata.asObservable();
-  private date = new BehaviorSubject<any>(0);
-  cast2 = this.date.asObservable();
 
   sendbookingdata(setvalue: any) {
     this.bookingdata.next(setvalue);
   }
 
-  sendDate(setvalue: any) {
-    this.date.next(setvalue);
+  // private bookingdata2 = new BehaviorSubject<any>(0);
+  // cast2 = this.bookingdata.asObservable();
+
+  // sendbookingdata2(setvalue: any) {
+  //   this.bookingdata.next(setvalue);
+  // }
+
+  getAuthUserRentals(): Observable<Rental[]> {
+    return this.http.get<Rental[]>(`http://localhost:4200/api/v1/rentals/me`);
+  }
+
+  getverifiedUser(id: any): Observable<any> {
+    return this.http.get<any>(
+      `http://localhost:4200/api/v1/rentals/${id}/verify-user`
+    );
+  }
+
+  deleterentals(id: any) {
+    return this.http.delete<Rental[]>(
+      `http://localhost:4200/api/v1/rentals/${id} `
+    );
+  }
+  updaterentals(id: any, rental: Rental) {
+    return this.http.patch<Rental[]>(
+      `http://localhost:4200/api/v1/rentals/${id}`,
+      rental
+    );
   }
 }

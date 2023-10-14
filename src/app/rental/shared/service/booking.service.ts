@@ -15,6 +15,21 @@ export class BookingService {
       `${apiconfig.rootUrl}${apiconfig.booking}?rental=${rentalId}`
     );
   }
+  getAuthbooking(): Observable<bookingModel[]> {
+    return this.http.get<bookingModel[]>(
+      `${apiconfig.rootUrl}${apiconfig.booking}/me`
+    );
+  }
+  getRecivebooking(): Observable<bookingModel[]> {
+    return this.http.get<bookingModel[]>(
+      `${apiconfig.rootUrl}${apiconfig.booking}/received`
+    );
+  }
+  deleteRecivebooking(id: any): Observable<bookingModel[]> {
+    return this.http.delete<bookingModel[]>(
+      `${apiconfig.rootUrl}${apiconfig.booking}/${id}`
+    );
+  }
 
   creatbooking(booking: bookingModel): Observable<bookingModel> {
     return this.http.post<bookingModel>(

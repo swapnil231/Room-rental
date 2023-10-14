@@ -39,7 +39,7 @@
               "src/styles.scss",
               "node_modules/font-awesome/css/font-awesome.min.css"
             ],
-            "scripts": [ ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -106,8 +106,22 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
+  },
+  "cli": {
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }

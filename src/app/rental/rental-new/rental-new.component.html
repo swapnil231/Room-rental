@@ -63,8 +63,15 @@
           </div>
 
           <div class="form-group">
-            <label for="bedrooms">Image Url</label>
-            <input class="form-control" id="image" formControlName="image">
+            <label for="bedrooms">Image</label>
+
+            <!-- <input class="form-control" id="image" formControlName="image"> -->
+            <app-image (imageUploaded)="attachImageToRental($event)">
+
+            </app-image>
+
+
+
             <div class="alert alert-danger" *ngIf="image?.invalid && !image?.pristine">
               <div *ngIf="image?.errors?.['required']">
                 image is required.

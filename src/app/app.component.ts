@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './auth/shared/service/auth.service';
+import { RentalistingService } from './shared/rentalisting.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,13 +9,22 @@ import { AuthService } from './auth/shared/service/auth.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
+  serchcity(city: string) {
+    city
+      ? this.router.navigate([`/rental/${city}/homes`])
+      : this.router.navigate(['/rental']);
+  }
   number = 0;
 
   title = 'roonrental';
   private game = 8;
   value = 'ram';
 
-  constructor(public authservice: AuthService) {}
+  constructor(
+    public authservice: AuthService,
+    private rentalservice: RentalistingService,
+    private router: Router
+  ) {}
   ngOnInit(): void {
     this.authservice.checkauthsatus();
   }

@@ -9,8 +9,8 @@
       <!-- [TODO:Here Comes Date Input] -->
       <mat-form-field style="width: 19vw;">
         <mat-label>Enter a date range</mat-label>
-        <mat-date-range-input [dateFilter]="myDateFilter" [rangePicker]="picker" [min]="mindate" [max]="maxdate"
-          [(ngModel)]="date">
+        <mat-date-range-input [dateFilter]="bookingdatesRangFilter" [rangePicker]="picker" [min]="mindate"
+          [max]="maxdate" [(ngModel)]="date">
           <input matStartDate placeholder="Start date" (dateChange)="OnDateChange($event)">
           <input matEndDate placeholder="End date" (dateChange)="OnDateChange2($event)">
         </mat-date-range-input>

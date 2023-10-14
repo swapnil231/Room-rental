@@ -1,16 +1,39 @@
-<a routerLink="/rental/{{rentalsend._id}}">
-
-  <div class="card bwm-card mb-3">
-    <img [src]="rentalsend.image" style="height: 202px; width: 302px;" class="card-img-top" alt="...">
+<div class="card bwm-card mb-3 ">
+  <a routerLink="/rental/{{rentalsend._id}}">
+    <img [src]="rentalsend.image.url" style="height: 202px; width: 302px;" class="card-img-top m-lg-2" alt="...">
     <div class="card-block">
-      <h6 class="card-subtitle type-{{rentalsend.category}}"> whole {{rentalsend.category}} - {{rentalsend.city}}</h6>
+      <h6 class="card-subtitle type-{{rentalsend.category}}"> whole {{rentalsend.category}} - {{rentalsend.city}}
+      </h6>
       <h4 class="card-title">{{rentalsend.title}}</h4>
 
       <p class="card-text">
         {{rentalsend.dailyPrice}} per night - free cancellation
       </p>
-      <!-- <a (click)="onsend()" class="btn btn-primary">Go</a> -->
+
 
     </div>
-  </div>
-</a>
+  </a>
+  <ng-content></ng-content>
+</div>
+
+
+
+
+
+<!-- <div *ngFor="let el of rentalsendarray">
+  <a routerLink="/rental/{{el._id}}">
+
+
+    <div class="card bwm-card mb-3">
+      <img [src]="el.image" style="height: 202px; width: 302px;" class="card-img-top" alt="...">
+      <div class="card-block">
+        <h6 class="card-subtitle type-{{el.category}}"> whole {{el.category}} - {{el.city}}</h6>
+        <h4 class="card-title">{{el.title}}</h4>
+
+        <p class="card-text">
+          {{el.dailyPrice}} per night - free cancellation
+        </p>
+      </div>
+    </div>
+  </a>
+</div> -->

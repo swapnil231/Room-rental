@@ -10,6 +10,14 @@
   font-weight: bold;
 }
 
+a {
+  &:hover, &:focus {
+    text-decoration: none !important;
+  }
+}
+
+
+
 .bwm-serch{
 
   height: 50px;

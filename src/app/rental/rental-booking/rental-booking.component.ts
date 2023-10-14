@@ -53,20 +53,13 @@ export class RentalBookingComponent implements OnInit {
     this.initbooking();
     this.getbooking();
     // this.checkifdatesareValid;
-    this.filter2;
   }
 
   madeBookings: any[] = [];
   getbooking() {
     this.bookingservice.getbooking(this.rental._id).subscribe({
       next: (res: bookingModel[]) => {
-        res.forEach((el) => {
-          const daterange = this.calcRangeDatesUsingMoment(
-            el.startAt,
-            el.endAt
-          );
-          this.madeBookings.push(...daterange);
-        });
+        res.forEach((el) => this.bookoutdates(el.startAt, el.endAt));
         console.log(res, 'ress');
         console.log(this.madeBookings, 'mybooking');
       },
@@ -162,7 +155,6 @@ export class RentalBookingComponent implements OnInit {
       enterAnimationDuration,
       exitAnimationDuration,
     });
-    // this.resetdate();
   }
 
   @ViewChild('picker') datepicker!: MatDatepicker<Date | null>;
@@ -172,60 +164,44 @@ export class RentalBookingComponent implements OnInit {
       this.datepicker.select(null);
     }
   }
-  // @ViewChild('resetvar') resetvar!: ElementRef;
-  // resetdate() {
-  //   this.rentalservice.sendDate(this.resetvar);
-  //   console.log(this.resetvar.nativeElement);
-  // }
 
   calcRangeDatesUsingMoment(startAt: string, endAt: string): string[] | any {
     let dates: string[] = [];
-    // if (moment(startAt)) {
-    // console.log(startAt);
-    // dates.push(moment(startAt).format());
+
     let mStartAt = moment(startAt);
     const mEndAt = moment(endAt);
 
     while (mStartAt < mEndAt) {
       dates.push(mStartAt.format());
       mStartAt = mStartAt.add(1, 'day');
-      // }
     }
     return dates;
-    // let mStartAt = moment(startAt);
-    // const mEndAt = moment(endAt);
-    // while (mStartAt > mEndAt) {
-    //   dates.push(mStartAt.format());
-    //   mStartAt = mStartAt.add(1, 'day');
-    // }
-    // console.log(mStartAt);
-    // console.log(dates);
-    // return dates;
+  }
+  bookoutdates(startAt: any, endAt: any) {
+    const daterange = this.calcRangeDatesUsingMoment(startAt, endAt);
+    this.madeBookings.push(...daterange);
   }
 
-  filter2 = (date: Moment): boolean => {
-    const x = this.madeBookings.includes(date.format());
-    console.log(x);
-    return x;
+  bookingdatesRangFilter = (date: Moment): boolean => {
+    if (this.madeBookings.includes(date.format())) {
+      return false;
+    } else {
+      return true;
+    }
   };
-  // filter2 = (d: Date | null): boolean => {
-  //   // console.log(d.format());
-  //   let day = (d || new Date()).getDate()
 
-  //   const c= this.madeBookings.includes(day);
+  // sat/sun filter using movment
 
+  // myDateFilter = (m: Moment | null): boolean => {
+  //   const day = (m || moment()).day();
+  //   return day !== 0 && day !== 6;
   // };
 
-  myDateFilter = (m: Moment | null): boolean => {
-    const day = (m || moment()).day();
-    return day !== 0 && day !== 6;
-  };
-
   // sat/sun filter
-  myFilter = (d: Date | null): boolean => {
-    const day = (d || new Date()).getDay();
-    // Prevent Saturday and Sunday from being selected.
-    console.log('hi');
-    return day !== 0 && day !== 6;
-  };
+  // myFilter = (d: Date | null): boolean => {
+  //   const day = (d || new Date()).getDay();
+  //   // Prevent Saturday and Sunday from being selected.
+  //   console.log('hi');
+  //   return day !== 0 && day !== 6;
+  // };
 }

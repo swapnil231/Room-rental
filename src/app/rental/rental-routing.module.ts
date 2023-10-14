@@ -7,6 +7,9 @@ import { RentalccComponent } from './rentalcc/rentalcc.component';
 import { SupersecretComponent } from './supersecret/supersecret.component';
 import { authguardGuard } from '../auth/guard/authguard.guard';
 import { RentalNewComponent } from './rental-new/rental-new.component';
+import { RentalHomesComponent } from './rental-homes/rental-homes.component';
+import { RentalEditComponent } from './rental-edit/rental-edit.component';
+import { rentalGuard } from '../auth/shared/rental-guard/rental.guard';
 
 const routes: Routes = [
   {
@@ -27,6 +30,17 @@ const routes: Routes = [
       {
         path: ':rentalid',
         component: RentalDetailsComponent,
+      },
+      {
+        path: ':rentalId/edit',
+        component: RentalEditComponent,
+        canActivate: [authguardGuard, rentalGuard],
+        // canDeactivate: [rentalGuard],
+      },
+
+      {
+        path: ':city/homes',
+        component: RentalHomesComponent,
       },
 
       {

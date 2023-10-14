@@ -11,8 +11,10 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <form class="d-flex me-auto " role="search">
-        <input class="form-control me-2 bwm-serch" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-primary bwm-btn-main" type="submit">Search</button>
+        <input #cityvalue (keyup.enter)="serchcity(cityvalue.value)" class="form-control me-2 bwm-serch" type="search"
+          placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-primary bwm-btn-main" type="submit"
+          (click)="serchcity(cityvalue.value)">Search</button>
       </form>
       <ul class="navbar-nav  mb-2 mb-lg-0 mynavbar">
         <li class="nav-item">
@@ -28,7 +30,13 @@
           </a>
           <ul class="dropdown-menu mr-6">
             <li><a class="dropdown-item" routerLink="/rental/new">creat rental</a></li>
-            <li><a class="dropdown-item" routerLink="/" (click)="logout()">logout</a></li>
+            <li><a class="dropdown-item" routerLink="/manage/rentals">My Rental</a></li>
+            <li><a class="dropdown-item" routerLink="/manage/bookings">My bookings</a></li>
+            <li><a class="dropdown-item" [queryParams]="{type:'received'}" routerLink="/manage/bookings">Recived
+                Bookings</a></li>
+            <li>
+              <a class="dropdown-item" routerLink="/" (click)="logout()">logout</a>
+            </li>
           </ul>
         </li>
 

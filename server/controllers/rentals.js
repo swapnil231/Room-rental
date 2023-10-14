@@ -4,23 +4,54 @@
 
 const { ObjectId } = require('mongodb')
 const Rental=require('../models/rental')
+const Booking=require('../models/booking')
 
 exports.getRentals=async (req,res)=>{
   try{
-  const data= await Rental.find()
-     if(data){
-      return res.json(data)
-    }
+
+   const city =req.query.city
+   console.log(city)
+   const query = city ? {city:city.toLowerCase()} : {}
+     console.log(query)
+
+   const data= await Rental.find(query).populate('image')
+   return res.json(data)
+    //  if(data && data.length>0){
+
+    // }else{
+    //   return new Rental().sendError(res,{status:422,detail:'rentals for this city not exist'})
+    // }
+
   }catch(err){
     return new Rental().sendError(res,{status:422,detail:'cant retrive data'})
 
   }
 
  }
+
+ exports.getUserRentals =async(req,res)=>{
+  try{
+  const {user}=res.locals
+  const rentals=await Rental.find({owner:user}).populate('image')
+
+  if(rentals){
+    return res.json(rentals)
+
+  }
+
+  }catch(err){
+    return new Rental().sendError(res,{status:422,detail:'cant find  users rentals'})
+
+  }
+
+
+}
+
+
 exports.getRentalsById=async (req,res)=>{
   try{
     const {rentalId}=req.params
-    const rental=  await Rental.findById(rentalId)
+    const rental=  await Rental.findById(rentalId).populate('image')
 
     if(rental){
       return res.json(rental)
@@ -105,3 +136,108 @@ if(ownerid==user.id){
   }
 
 }
+
+exports.deleteRental=async(req,res)=>{
+  try{
+
+
+    const {rentalId}=req.params
+    const {user}=res.locals
+    const rental =await Rental
+                    .findById(rentalId).populate('owner')
+
+const booking=await Booking.find({rental})
+
+ if(user.id !==rental.owner.id){
+  return new Rental().sendError(res,{status:422,detail:'invalid user you not owner of rental'})
+        }
+
+        if(booking && booking.length>0){
+          return new Rental().sendError(res,{status:422,detail:'cant delete active booking rental'})
+        }
+        await rental.deleteOne()
+        return res.json({message:`rental  of id ${rentalId}has been deleted`})
+
+  }catch(err){
+    return new Rental().sendError(res,{status:422,detail:'oops something went wrong'})
+    }
+
+}
+
+//updaterental
+exports.updateRental=async(req,res)=>{
+  try{
+
+
+
+
+    const rentaldata=req.body
+
+    const {user}=res.locals
+    const {rentalId}=req.params
+    const rental =await Rental
+                    .findById(rentalId).populate('owner').populate('image')
+
+
+
+ if(user.id !==rental.owner.id){
+  return new Rental().sendError(res,{status:422,detail:'invalid user you not owner of rental'})
+        }
+
+//  toprint validation error
+       const validate= rental.set(rentaldata)
+       const validatedModel = validate.validateSync()
+        if(!!validatedModel) throw validatedModel
+
+        // or using custom error
+        // if(!!validatedModel){
+
+        //   return new Rental().sendError(res,{status:422,detail:validatedModel.message})
+
+
+        // }
+
+        await rental.save()
+        const Updatedrental =await Rental
+                    .findById(rentalId).populate('owner').populate('image')
+       return res.status(200).send(Updatedrental)
+
+  }catch(err){
+    // return new Rental().sendError(res,{status:422,detail:'oops something went wrong cant update rental'})
+    // }
+    return res.mongoError(err)}
+
+}
+
+
+// verifyuser
+
+exports.verifyuser=async(req,res)=>{
+  try{
+
+
+
+
+
+    const {user}=res.locals
+    const {rentalId}=req.params
+    const rental =await Rental
+                    .findById(rentalId).populate('owner')
+
+
+
+ if(user.id !==rental.owner.id){
+  return new Rental().sendError(res,{status:422,detail:'invalid user you not owner of rental'})
+        }
+
+
+
+
+        return res.json({message:`user is verified`})
+
+  }catch(err){
+    return new Rental().sendError(res,{status:422,detail:'oops something went wrong cant verify user'})
+    }
+
+}
+

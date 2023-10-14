@@ -84,6 +84,7 @@ export class MapService {
   }
 
   addMrkertoMap(map: any, position: geoposition) {
+    this.removePreviousMarker();
     const markerDiv = document.createElement('div');
     markerDiv.className = 'marker';
 
@@ -99,6 +100,7 @@ export class MapService {
   }
 
   creatPopup(err: any, map: tt.Map) {
+    this.removePreviouspopupClass();
     new tt.Popup({
       className: 'my-class',
       closeButton: false,
@@ -121,6 +123,21 @@ export class MapService {
 
   private removeSpaceAndtoLowercase(location: string) {
     return location.replace(/\s/g, '').toLowerCase();
+  }
+
+  private removeElementbyClass(classname: string) {
+    const elements = document.getElementsByClassName(classname);
+    while (elements.length > 0) {
+      elements[0].parentNode?.removeChild(elements[0]);
+    }
+  }
+
+  removePreviousMarker() {
+    this.removeElementbyClass('marker');
+  }
+
+  removePreviouspopupClass() {
+    this.removeElementbyClass('my-class');
   }
 }
 

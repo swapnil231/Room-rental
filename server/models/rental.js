@@ -4,16 +4,18 @@ const Schema=mongoose.Schema
 const rentalSchema=new Schema({
 
 
-    title: {type:String,required:true,maxLenght:[128,'invalid lenght! maxlenght is 128 charactor']},
+    title: {type:String,required:true,
+    maxlength:[128,'invalid lenght! maxlenght is 128 charactor']},
     city: {type:String,required:true,lowercase:true},
     street: {type:String,required:true,lowercase:true,minLenght:[4,'invalid lenght! minlenght is 4 charactor']},
     category:{type:String,required:true,lowercase:true},
-    image:{type:String,required:true},
+    // image:{type:String,required:true},
     numOfRooms: {type:Number,required:true},
     description: {type:String,required:true},
     dailyPrice:{type:Number,required:true},
     shared:String,
     owner:{type:Schema.ObjectId,ref:'Register'},
+    image: { type: Schema.Types.ObjectId, ref: 'CloudinaryImage' },
 
     createdAt:{type:Date,default:Date.now},
 

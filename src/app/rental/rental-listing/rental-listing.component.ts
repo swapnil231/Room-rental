@@ -9,14 +9,18 @@ import { Rental } from 'src/app/shared/rental-modal';
 })
 export class RentalListingComponent implements OnInit {
   rental: Rental[] = [];
+
   ngOnInit(): void {
     this.rentalisting_service.getRentals().subscribe((res) => {
       this.rental = res;
     });
   }
+
   sendparent: any;
   msg = '';
+
   constructor(private rentalisting_service: RentalistingService) {}
+
   xxx(nym: number) {
     this.msg = 'msg recived';
     return (this.sendparent = nym);

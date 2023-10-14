@@ -19,6 +19,7 @@ export class RentalNewComponent implements OnInit, OnDestroy {
   rentalCategories = ['apartment', 'condo', 'house'];
 
   creatrental!: FormGroup;
+  // creatrental=new Rental()
   errorx: any;
 
   sucessMessage: any;
@@ -40,6 +41,7 @@ export class RentalNewComponent implements OnInit, OnDestroy {
   forminit() {
     this.creatrental = this.fb.group({
       title: ['', [Validators.required, Validators.maxLength(20)]],
+
       city: ['', [Validators.required, Validators.maxLength(10)]],
       street: ['', [Validators.required, Validators.maxLength(20)]],
       category: ['apartment'],
@@ -107,5 +109,11 @@ export class RentalNewComponent implements OnInit, OnDestroy {
         alert(JSON.stringify(err));
       },
     });
+  }
+
+  attachImageToRental(imageId: string) {
+    console.log(imageId);
+    this.creatrental.controls['image'].setValue(imageId);
+    console.log(this.creatrental.controls['image'].value);
   }
 }
