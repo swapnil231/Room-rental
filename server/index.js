@@ -8,6 +8,7 @@ const Rental=require('./models/rental')
 const app = express();
 const {onlyAuthUser}=require('./controllers/users')
 const {provideMongoErrorHandler}=require('./middleware/index')
+const bookingoutes=require('./routes/booking')
 
 
 const PORT = process.env.PORT || 3001;
@@ -31,6 +32,10 @@ app.get('/api/v1/secret', onlyAuthUser,(req,res)=>{
 app.use('/api/v1/rentals',rentalroutes)
 
 app.use('/api/v1/users/',usersroutes)
+app.use('/api/v1/bookings/' ,bookingoutes)
+
+
+// connecting to server
 
 app.listen(PORT,()=>{
   console.log('server is lisening',PORT)

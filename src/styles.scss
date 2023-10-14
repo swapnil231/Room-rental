@@ -1,7 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'bootstrap/dist/css/bootstrap.css';
 @import'./scsss/form.scss';
+// @import'/node_modules/bulma/bulma.sass';
 @import 'color';
+// @import 'bulma.sass';
+
+// Import component
+@import "/node_modules/bulma-calendar/dist/css/bulma-calendar.css";
 html,body{
   height: 100%;
 }
@@ -39,4 +44,28 @@ html,body,p{
   }
 }
 
+.bwm-btn-main2{
+  border-color: greenyellow ;
+  color: greenyellow ;
 
+  &:hover,&:active,&:focus-visible{
+    color:white;
+    background-color: greenyellow;
+    border-color:  greenyellow
+
+  }
+}
+.marker{
+  width: 120px;
+  height:120px ;
+  margin-top: 60px;
+  border-radius: 50%;
+  background-color: red;
+  opacity: 0.3;
+
+}
+
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -98,7 +98,7 @@ export class AuthService implements OnInit {
 
   get isauthenticated(): boolean {
     const isauth = moment().isBefore(this.expiration);
-    console.log(isauth);
+    // console.log(isauth);
     return isauth;
   }
   private get expiration() {
@@ -107,7 +107,10 @@ export class AuthService implements OnInit {
 
   get username(): string {
     const x = this.decodedtokenx.username;
-    console.log(x);
+    // console.log(x);
     return x;
+  }
+  get token() {
+    return localStorage.getItem('bwm_auth_tokn') || '';
   }
 }

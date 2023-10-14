@@ -197,23 +197,28 @@ async function authtoken(password,email,findOnex,res){
      username:findOnex.username,
      },config.JWT_SECRET,{expiresIn:"2h"
      })
-     const findlogin= await login.findOne({email})
+    //  const findlogin= await login.findOne({email})
 
-   if(!findlogin){
+  //  if(!findlogin){
 
-       const newlogin=new login({email,password})
+  //      const newlogin=new login({email,password})
 
-       const creatlogin=await newlogin.save()
+  //      const creatlogin=await newlogin.save()
 
 
-       if(creatlogin){
-       return res.json({token:token, message:`new user is login with id ${creatlogin._id}`})
-        }
-      }
+  //      if(creatlogin){
+  //      return res.json({token:token, message:`new user is login with id ${creatlogin._id}`})
+  //       }
+  //     }
 
-      if(findlogin){
-        return res.json({token:token,message:'token send'})
-      }
+  //     if(findlogin){
+  //       return res.json({token:token,message:'token send'})
+  //     }
+
+
+        return res.json({token:token,message:'login sucessfully',
+      })
+
  }
    if(x===false){
     return register.sendError(res,{title:'password error',detail:'password is wrong'})
