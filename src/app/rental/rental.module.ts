@@ -24,7 +24,12 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 
 import { MatInputModule } from '@angular/material/input';
-// import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { ToastrModule } from 'ngx-toastr';
+import { RentalHomesComponent } from './rental-homes/rental-homes.component';
+import { RentalEditComponent } from './rental-edit/rental-edit.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +39,8 @@ import { MatInputModule } from '@angular/material/input';
     SupersecretComponent,
     RentalNewComponent,
     RentalBookingComponent,
+    RentalHomesComponent,
+    RentalEditComponent,
   ],
 
   imports: [
@@ -50,6 +57,9 @@ import { MatInputModule } from '@angular/material/input';
     MatDialogModule,
     MatButtonModule,
     MatInputModule,
+    MatMomentDateModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   exports: [RentalDetailsComponent, RentalListingComponent, RentalccComponent],
 })

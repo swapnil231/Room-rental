@@ -9,6 +9,9 @@ const app = express();
 const {onlyAuthUser}=require('./controllers/users')
 const {provideMongoErrorHandler}=require('./middleware/index')
 const bookingoutes=require('./routes/booking')
+const {provideMongoErrorHandler2}=require('./middleware/index')
+const imageUploadRoutes=require('./routes/image-upload')
+const  cloudanaryimage=require('./models/cloudanary-image');
 
 
 const PORT = process.env.PORT || 3001;
@@ -21,7 +24,8 @@ mongoose.connect(config.DB_URI).then(()=>console.log('connected'))
 
 //middleware
 app.use(bodyParser.json());
-// app.use(provideMongoErrorHandler)
+app.use(provideMongoErrorHandler2)
+app.use('/api/v1/image-upload',imageUploadRoutes)
 
 
 app.get('/api/v1/secret', onlyAuthUser,(req,res)=>{

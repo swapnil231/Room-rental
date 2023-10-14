@@ -11,6 +11,9 @@ import { AuthModule } from './auth/auth.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './auth/shared/interceptor/token.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { ManageModule } from './manage/manage.module';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +26,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     Auth2Module,
     AuthModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    ManageModule,
+    ImageCropperModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
