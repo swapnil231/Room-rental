@@ -1,24 +1,14 @@
-<section class="container" *ngIf="rental && rental._id" id="rentalDetails">
-  <!-- <div class="row"> -->
+<section class="container py-5" id="rentalDetails" *ngIf="rental && rental._id">
   <div class="upper-section col">
     <div class="row">
       <div class="bgclass" class="col-sm-6">
-        <!-- TODO: Display rental image -->
-        <!-- <img [src]="rental.image.url" style="height: 420PX; width: 480px;" alt=""> -->
         <app-image-editable [rental]="rental"></app-image-editable>
-
-
       </div>
+
       <div class="col-sm-6">
-        <!-- TODO: Display rental image -->
-        <!-- <img [src]="rental.image" alt=""> -->
-
         <app-map [rentallocation]="rental.city +',' +rental.street" [mapNotifier]="$locationSubject"></app-map>
-        <!-- <app-map [rentallocation]="'kkkkkkkk'"></app-map> -->
-
-
-
       </div>
+
     </div>
   </div>
 
@@ -26,10 +16,10 @@
     <div class="row">
       <div class="col-md-12">
         <div class="rental">
-          <!-- TODO: Display shared category -->
+
           <h2 [appHighlight]="bgColor" class="rental-type type-{{rental.category}}">
-            <!-- {{rental.shared ? 'Shared' : 'Whole'}}  -->
             <span>shared:=></span>
+
             <app-editable [entity]="rental" class="d-inline-flex m-lg-2" [field]="'shared'" [type]="'select'"
               [option]="['true','false']" [htmltagtype]="'select'"
               (entityupdated)="updateRental($event)"></app-editable>
@@ -38,17 +28,13 @@
               [option]="rentalcategories" [type]="'select'" [htmltagtype]="'select'"
               (entityupdated)="updateRental($event)"></app-editable>
 
-
-            <!-- {{rental.category}} -->
           </h2>
-          <!-- TODO: Display title -->
-          <!-- <h1 class="rental-title">{{rental.title}}</h1> -->
+
           <h1 class="rental-title">
             <app-editable [entity]="rental" [field]="'title'" [type]="'text'" [htmltagtype]="'input'"
               (entityupdated)="updateRental($event)"></app-editable>
           </h1>
-          <!-- TODO: Display city -->
-          <!-- <h2 class="rental-city">{{rental.city | uppercasefirstLetter}}</h2> -->
+
           <h2 class="rental-city">
             <app-editable [entity]="rental" [field]="'city'" [type]="'text'" [htmltagtype]="'input'"
               (entityupdated)="updateRental($event)"></app-editable>
@@ -61,22 +47,17 @@
 
 
           <div class="rental-room-info">
-            <!-- TODO: Display numOfRooms -->
-            <!-- <span><i class="fa fa-building"></i>{{rental.numOfRooms}} bedrooms</span> -->
             <span><i class="fa fa-building">
                 Rooms:
               </i><app-editable [type]="'number'" class="d-inline-flex" [htmltagtype]="'input'" [entity]="rental"
                 [field]="'numOfRooms'" (entityupdated)="updateRental($event)"></app-editable></span>
-            <!-- TODO: Display numOfRooms + 4 -->
             <span><i class="fa fa-user"></i>{{convertStringtoNumber(4)}} guests</span>
-            <!-- TODO: Display numOfRooms + 2 -->
             <span><i class="fa fa-bed"></i>{{convertStringtoNumber(2)}} beds</span>
           </div>
-          <!-- TODO: Display description -->
+
           <p class="rental-description">
             <app-editable [entity]="rental" [field]="'description'" (entityupdated)="updateRental($event)"
               [htmltagtype]="'textarea'"></app-editable>
-            <!-- {{rental.description}} -->
           </p>
           <hr>
           <div class="rental-assets">
@@ -99,7 +80,6 @@
 
     </div>
   </div>
-  <!-- </div> -->
 </section>
 
 <router-outlet></router-outlet>

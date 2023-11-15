@@ -1,4 +1,4 @@
-@import 'color';
+@import "color";
 
 #rentalDetails {
   .upper-section {
@@ -11,6 +11,7 @@
 
   .details-section {
     color: $dark-gray-color;
+
     .rental {
       &-type {
         font-size: 14px;

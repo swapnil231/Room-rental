@@ -5,17 +5,16 @@ class CImage {
 }
 
 export class Rental {
-  _id: string = ''; // unique identifier as it will be stored in DB
-  title: string = ''; // Some nice place in LA
-  city: string = ''; // Los Angeles
-  street: string = ''; // Main Street
-  category: string = ''; // apartment
+  _id = ''; // unique identifier as it will be stored in DB
+  title = ''; // Some nice place in LA
+  city = ''; // Los Angeles
+  street = ''; // Main Street
+  category = ''; // apartment
   image!: CImage;
-  // image = new CImage();
   numOfRooms!: number; // 5
-  description: string = ''; // Some nice place near a beach.
+  description = ''; // Some nice place near a beach.
   dailyPrice!: number; // 127
   shared!: boolean; // true || false
-  createdAt: string = ''; // 23/12/2020 11:11:11
+  createdAt = ''; // 23/12/2020 11:11:11
   static readonly CATEGORIES = ['apartment', 'condo', 'house'];
 }

@@ -5,7 +5,6 @@ import {
   NG_VALIDATORS,
   FormGroup,
   ValidationErrors,
-  FormControl,
 } from '@angular/forms';
 
 @Directive({
@@ -24,14 +23,11 @@ export class SameAsDirective implements Validator {
   @Input('appSameAs') controls!: string[];
 
   validate(control: FormGroup): ValidationErrors | null {
-    console.log('control', control.value);
-    console.log('controls', this.controls);
-
-    let x =
+    const x =
       this.controls && this.controls.length === 2
         ? this.customvalidators.sameAsValidator(this.controls)(control)
         : null;
-    console.log(x);
+
     return x;
   }
 }

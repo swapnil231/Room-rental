@@ -1,34 +1,64 @@
-<section id="userBookings">
-  <h1 class="page-title">{{title}}</h1>
+<div class="notfound-section d-flex justify-content-center align-items-center mt-4"
+  *ngIf="booking?.length === 0 && !isFetching">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="text-content">
+          <h1 style="color: white;">
+            Sorry! No result found
+          </h1>
+          <p style="color: white; font-size: medium;">we are sorry what you were looking for.Please try another way.</p>
+          <a class="btn btn-warning btn-lg" routerLink="/rental">Home</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-  <p *ngIf="booking.length === 0 && !isFetching" class="alert alert-warning">
-    No booking found
-  </p>
 
-  <div class="row">
+
+
+
+<section id="userBookings" class="py-3">
+  <h1 class="page-title" *ngIf="booking.length!==0">{{title}}</h1>
+
+  <div class="row g-4">
     <ng-container *ngIf="booking">
-      <!-- Iterate bookings -->
-      <div class="col-md-4">
-        <div class="card text-center" *ngFor="let el of booking">
-          <!-- Only if type === 'received' -->
+      <div class="col-lg-4 col-md-6" *ngFor="let el of booking">
+        <div class="card text-center">
+
           <div class="card-header">
             From: {{el.user.username}}
           </div>
+
           <div class="card-block">
+
             <ng-container>
-              <h4 class="card-title">{{el.rental.title}} - {{el.rental.city}}</h4>
+              <h1 style="font-size:xx-large;" class="card-title">{{el.rental.title}}</h1>
+              <h6 class="card-title"><i class="lni lni-map-marker"></i>{{el.rental.street}}, {{el.rental.city}}</h6>
             </ng-container>
+
             <p class="card-text booking-days">
-              {{el.startAt |timeFormat}} - {{el.endAt |timeFormat}} | {{el.nights}} nights
+              {{el.startAt |timeFormat}} - {{el.endAt |timeFormat}} | <span
+                style="color:yellow;font-size: large;">{{el.nights}}
+                nights</span>
             </p>
-            <p class="card-text"><span>Price: </span> <span class="booking-price-value">{{el.price}}</span></p>
-            <a class="btn bwm-btn-main">Go to Rental</a>
-            <button class="ml-1 btn btn-danger" *ngIf="type === 'all'" (click)="deleteRecivedBooking(el._id)">Delete
-            </button>
+
+            <p class="card-text"><span>Price: </span> <span style="color: yellow; font-size: x-large;"
+                class="booking-price-value">${{el.price}}</span></p>
+
+            <div class="row weapperow m-1">
+              <a class="col m-1 btn btn-primary" routerLink="/rental">Home</a>
+              <button class="col m-1 btn btn-warning" *ngIf="type === 'all'"
+                (click)="deleteRecivedBooking(el._id)">Delete</button>
+            </div>
+
           </div>
+
           <div class="card-footer text-muted">
             createdAt : {{el.createdAt |timeFormat}}
           </div>
+
         </div>
       </div>
     </ng-container>

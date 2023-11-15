@@ -10,21 +10,18 @@ import { ImageSnippet } from '../../image-uplod/image/image.component';
 })
 export class ImageEditableComponent {
   istrue = true;
+  @Input() rental!: Rental;
+  imageidx: any;
+  selectedimage!: ImageSnippet;
+
+  constructor(private rental_service: RentalistingService) {}
 
   selectedImag($event: any) {
     this.selectedimage = $event;
     this.istrue = false;
   }
 
-  @Input() rental!: Rental;
-  imageidx: any;
-  selectedimage!: ImageSnippet;
-  // @Output() istruesend = new EventEmitter();
-
-  constructor(private rental_service: RentalistingService) {}
-
   attachImageToRental(imageId: string) {
-    console.log(imageId);
     this.imageidx = imageId;
     this.rental.image._id = this.imageidx;
 
@@ -37,7 +34,6 @@ export class ImageEditableComponent {
     this.rental_service.updaterentals(this.rental._id, this.rental).subscribe({
       next: (res: any) => {
         this.rental = res;
-        console.log(res, 'res2');
         alert('image save sucessfully');
       },
       error: (err) => {

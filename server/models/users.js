@@ -1,3 +1,6 @@
+/* eslint-env es6 */
+/* eslint-disable no-console */
+
 const mongoose=require('mongoose')
 const schema=mongoose.Schema
 const bcrypt=require('bcryptjs')

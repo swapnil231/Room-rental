@@ -2,12 +2,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
-import { GuestguardGuard, authguardGuard } from './auth/guard/authguard.guard';
+import { GuestguardGuard } from './auth/guard/authguard.guard';
 import { RentalListingComponent } from './rental/rental-listing/rental-listing.component';
-import { SupersecretComponent } from './rental/supersecret/supersecret.component';
+import { ManageComponent } from './manage/manage/manage.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/rental', pathMatch: 'full' },
+  // { path: '', redirectTo: '/rental', pathMatch: 'full' },
+  { path: '', component: RentalListingComponent },
+
   { path: 'login', component: LoginComponent, canActivate: [GuestguardGuard] },
   {
     path: 'register',
@@ -15,18 +17,18 @@ const routes: Routes = [
     canActivate: [GuestguardGuard],
   },
 
-  // {
-  //   path: 'rental/super',
-  //   component: SupersecretComponent,
-  //   canActivate: [authguardGuard],
-  //   pathMatch: 'full',
-  // },
-  // {
-  //   path: '**',
-  //   component: RentalListingComponent,
+  {
+    path: 'login/:id',
+    component: RentalListingComponent,
 
-  //   pathMatch: 'full',
-  // },
+    pathMatch: 'full',
+  },
+  {
+    path: 'register/:id',
+    component: RentalListingComponent,
+
+    pathMatch: 'full',
+  },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

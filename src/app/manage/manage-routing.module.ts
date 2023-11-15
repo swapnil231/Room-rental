@@ -20,12 +20,6 @@ const routes: Routes = [
         component: ManageRentalsComponent,
         canActivate: [authguardGuard],
       },
-
-      // {
-      //   path: '**',
-      //   component: RentalListingComponent,
-      //   pathMatch: 'full',
-      // },
     ],
   },
 ];

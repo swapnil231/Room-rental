@@ -1,11 +1,11 @@
-import { Injectable, OnInit } from '@angular/core';
-import { LoginForm, RegisterForm } from '../../RegisterForm';
+import { Injectable } from '@angular/core';
+import { RegisterForm } from '../../RegisterForm';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { apiconfig } from './apiConfig';
-import { catchError, config, map, of, throwError } from 'rxjs';
+import { catchError, map, throwError } from 'rxjs';
 import { FormGroup } from '@angular/forms';
 import { apiError } from './helperfun/apiError';
-import { JwtHelperService } from '@auth0/angular-jwt';
+
 import jwt_decode from 'jwt-decode';
 import * as moment from 'moment';
 
@@ -14,21 +14,20 @@ interface loginresponce {
   message: string;
 }
 class decotedtoken {
-  exp: number = 0;
-  username: string = '';
-  userId: string = '';
+  exp = 0;
+  username = '';
+  userId = '';
 }
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService implements OnInit {
+export class AuthService {
   private decodedtokenx: decotedtoken | any;
   redirectUrl: any;
   constructor(private http: HttpClient) {
     this.decodedtokenx = new decotedtoken();
   }
-  ngOnInit(): void {}
 
   register(formdata: RegisterForm) {
     return this.http
@@ -76,7 +75,6 @@ export class AuthService implements OnInit {
     this.decodedtokenx = new decotedtoken();
   }
   private saveToken(token: string): string | null {
-    // const decodedtoken = jwt.decodeToken(token);
     const decodedtokenm = this.getDecodedAccessToken(token);
 
     if (!decodedtokenm) {
@@ -88,7 +86,7 @@ export class AuthService implements OnInit {
     return token;
   }
 
-  getDecodedAccessToken(token: string): any {
+  getDecodedAccessToken(token: string) {
     try {
       return jwt_decode(token);
     } catch (Error) {
@@ -98,7 +96,7 @@ export class AuthService implements OnInit {
 
   get isauthenticated(): boolean {
     const isauth = moment().isBefore(this.expiration);
-    // console.log(isauth);
+
     return isauth;
   }
   private get expiration() {
@@ -107,7 +105,6 @@ export class AuthService implements OnInit {
 
   get username(): string {
     const x = this.decodedtokenx.username;
-    // console.log(x);
     return x;
   }
   get token() {

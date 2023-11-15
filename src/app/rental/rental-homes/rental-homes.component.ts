@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Rental } from 'src/app/shared/rental-modal';
 import { RentalistingService } from 'src/app/shared/rentalisting.service';
 
@@ -13,7 +13,9 @@ export class RentalHomesComponent implements OnInit {
     private activatedroute: ActivatedRoute,
     private rentalservice: RentalistingService
   ) {}
-  city: string = '';
+  city = '';
+  isFetching = false;
+  rentals: Rental[] = [];
 
   ngOnInit(): void {
     this.getActivatedRoutes();
@@ -25,16 +27,13 @@ export class RentalHomesComponent implements OnInit {
       this.getRentalsByCityNames(this.city);
     });
   }
-  isFetching = false;
-  rentals: Rental[] = [];
+
   getRentalsByCityNames(city: string) {
     this.isFetching = true;
-    console.log(city);
     this.rentalservice.getRentalsbycity(city).subscribe({
       next: (res) => {
         this.rentals = res;
         this.isFetching = false;
-        console.log(res);
       },
       error: (err) => {
         console.log(err);

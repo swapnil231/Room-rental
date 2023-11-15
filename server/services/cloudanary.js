@@ -1,3 +1,5 @@
+/* eslint-env es6 */
+/* eslint-disable no-console */
 const cloudinary = require('cloudinary').v2;
 const config=require('../config/dev')
 

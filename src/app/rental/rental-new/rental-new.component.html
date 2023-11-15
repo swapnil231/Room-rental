@@ -1,174 +1,153 @@
-<section id="newRental">
-  <div class="bwm-form">
-    <div class="row">
-      <div class="col-md-5">
-        <h1 class="page-title">Create Rental</h1>
-        <div *ngIf="sucessMessage" class="alert alert-success">
-          {{sucessMessage}}
+<!----------------------- Main Container -------------------------->
+<div class="container d-flex justify-content-center align-items-center min-vh-100 mt-3 allbody">
+
+  <!----------------------- rental Container -------------------------->
+  <div class="row border rounded-5  bg-white shadow box-area">
+    <!--------------------------- Left Box ----------------------------->
+    <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box"
+      style="background: #103cbe;">
+
+      <small class="text-white text-wrap text-center"
+        style="width: 17rem;font-family: 'Courier New', Courier, monospace;">Hundreds of awesome places in reach of few
+        clicks.</small>
+
+      <div class="featured-image">
+        <img src="assets/images/create-rental.jpg" class="img-fluid" style="width: 450px; height: auto;" alt="">
+      </div>
+
+    </div>
+    <!-------------------- ------ Right Box ---------------------------->
+
+    <div class="col-md-6 right-box">
+      <div class="row align-items-center">
+
+        <div class="header-text mb-4">
+          <h1 style="font-size: xx-large;">Create Rental</h1>
+          <div *ngIf="sucessMessage" class="alert alert-success">
+            {{sucessMessage}}
+          </div>
         </div>
+
         <form [formGroup]="creatrental">
-          <div class="form-group">
-            <label for="title">Title</label>
-            <input type="text" class="form-control" id="title" formControlName="title">
+          <div class="input-group mb-3">
+            <input type="text" id="title" formControlName="title" class="form-control form-control-lg bg-light fs-6"
+              placeholder="title">
+          </div>
 
-            <div class="alert alert-danger" *ngIf="title?.invalid && !title?.pristine">
-              <div *ngIf="title?.errors?.['required']">
-                title is required.
-
-              </div>
-              <div *ngIf="title?.errors?.['maxlength']">
-                maxlength of characters is 20
-
-              </div>
+          <div class="alert alert-danger" *ngIf="title?.invalid && !title?.pristine">
+            <div *ngIf="title?.errors?.['required']">
+              title is required.
+            </div>
+            <div *ngIf="title?.errors?.['maxlength']">
+              maxlength of characters is 20
             </div>
           </div>
 
-          <div class="form-group">
-            <label for="city">City</label>
-            <input type="text" class="form-control" id="city" formControlName="city">
-            <div class="alert alert-danger" *ngIf="city?.invalid && !city?.pristine">
-              <div *ngIf="city?.errors?.['required']">
-                city is required.
-
-              </div>
-              <div *ngIf="city?.errors?.['maxlength']">
-                maxlength of characters is 10
-
-              </div>
+          <div class="input-group mb-3">
+            <input type="text" id="city" formControlName="city" class="form-control form-control-lg bg-light fs-6"
+              placeholder="city">
+          </div>
+          <div class="alert alert-danger" *ngIf="city?.invalid && !city?.pristine">
+            <div *ngIf="city?.errors?.['required']">
+              city is required.
+            </div>
+            <div *ngIf="city?.errors?.['maxlength']">
+              maxlength of characters is 10
             </div>
           </div>
 
-          <div class="form-group">
-            <label for="street">Street</label>
-            <input type="text" class="form-control" id="street" formControlName="street">
-            <div class="alert alert-danger" *ngIf="street?.invalid && !street?.pristine">
-              <div *ngIf="street?.errors?.['required']">
-                street is required.
-
-              </div>
-              <div *ngIf="street?.errors?.['maxlength']">
-                maxlength of characters is 50
-
-              </div>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control form-control-lg bg-light fs-6" id="street" formControlName="street"
+              placeholder="street">
+          </div>
+          <div class="alert alert-danger" *ngIf="street?.invalid && !street?.pristine">
+            <div *ngIf="street?.errors?.['required']">
+              street is required.
+            </div>
+            <div *ngIf="street?.errors?.['maxlength']">
+              maxlength of characters is 50
             </div>
           </div>
 
-          <div class="form-group">
+          <div class="mb-3">
             <label for="category">Category</label>
-
-            <select class="form-control" id="category" formControlName="category">
+            <select class="form-control form-control-lg bg-light fs-6" id="category" formControlName="category">
               <option *ngFor="let category of rentalCategories"> {{category}} </option>
-
             </select>
           </div>
 
-          <div class="form-group">
+          <div class="mb-3">
             <label for="bedrooms">Image</label>
-
-            <!-- <input class="form-control" id="image" formControlName="image"> -->
-            <app-image (imageUploaded)="attachImageToRental($event)">
-
-            </app-image>
-
-
+            <div>
+              <app-image (imageUploaded)="attachImageToRental($event)">
+              </app-image>
+            </div>
 
             <div class="alert alert-danger" *ngIf="image?.invalid && !image?.pristine">
               <div *ngIf="image?.errors?.['required']">
                 image is required.
-
               </div>
             </div>
           </div>
 
-          <div class="form-group">
-            <label for="bedrooms">Rooms</label>
-            <input type="number" class="form-control" id="numOfRooms" formControlName="numOfRooms">
+          <div class="input-group mb-3">
+            <input type="number" class="form-control form-control-lg bg-light fs-6" id="numOfRooms"
+              formControlName="numOfRooms" placeholder="Rooms">
             <div class="alert alert-danger" *ngIf="numOfRooms?.invalid && !numOfRooms?.pristine">
               <div *ngIf="numOfRooms?.errors?.['required']">
                 numOfRooms is required.
-
               </div>
             </div>
           </div>
 
-          <div class="form-group">
-            <label for="description">Description</label>
-            <textarea rows="5" type="text" class="form-control" id="description" formControlName="description">
+          <div class="input-group mb-3">
+            <textarea rows="5" type="text" class="form-control form-control-lg bg-light fs-6" id="description"
+              formControlName="description" placeholder="Description">
             </textarea>
             <div class="alert alert-danger" *ngIf="description?.invalid && !description?.pristine">
               <div *ngIf="description?.errors?.['required']">
                 description is required.
-
               </div>
               <div *ngIf="title?.errors?.['maxlength']">
-                maxlength of characters is 20
-
+                maxlength of characters is 50
               </div>
             </div>
           </div>
 
-          <div class="form-group">
-            <label for="dailyRate">Daily Price</label>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <div class="input-group-text">$</div>
-              </div>
-              <input type="number" class="form-control" id="dailyPrice" formControlName="dailyPrice">
-            </div>
+          <div class="input-group mb-3">
+            <div class="input-group-text">$</div>
+            <input type="number" class="form-control form-control-lg bg-light fs-6" id="dailyPrice"
+              formControlName="dailyPrice" placeholder="DailyPrice">
             <div class="alert alert-danger" *ngIf="dailyPrice?.invalid && !dailyPrice?.pristine">
               <div *ngIf="dailyPrice?.errors?.['required']">
                 dailyprice is required.
-
               </div>
             </div>
           </div>
 
-          <!-- <div class="form-group">
-            <label for="phone">Phone</label>
-            <input type="text" class="form-control" id="phone" formControlName="phone">
-            <div class="alert alert-danger" *ngIf="phone?.invalid && !phone?.pristine">
-              <div *ngIf="phone?.errors?.['required']">
-                phone is required.
-
-              </div>
-            </div>
-          </div> -->
-
-          <!-- <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-            <label class="form-check-label" for="flexCheckChecked">
-              Checked checkbox
-            </label>
-          </div> -->
-
-          <div class="form-check mt-2 mb-2">
+          <div class="input-group mb-3">
             <label for="shared">Shared</label>
-            <input type="checkbox" class="form-check-input" id="shared" value=" " formControlName="shared">
-
+            <input type="checkbox" class="form-check-input m-lg-1" id="shared" value=" " formControlName="shared">
             <div class="alert alert-danger" *ngIf="shared?.invalid && !shared?.pristine">
               <div *ngIf="shared?.errors?.['required']">
                 shared value is required.
-
               </div>
             </div>
           </div>
-          <button type="button" (click)="submit()" class="btn bwm-btn-main">Create
-          </button>
 
-          <div *ngIf="errorx" class="alert alert-danger">
-            <p>
-              'oops something went wrong'
-            </p>
+          <div class="input-group mb-3">
+            <button type="button" (click)="submit()" class="btn btn-lg btn-primary w-100 fs-6">Create
+            </button>
           </div>
+
         </form>
 
-      </div>
-      <div class="col-md-6 ml-auto">
-        <div class="image-container">
-          <h2 class="catchphrase">Hundreds of awesome places in reach of few clicks.</h2>
-          <img src="assets/images/create-rental.jpg" alt="">
+        <div *ngIf="errorx" class="alert alert-danger">
+          <p>
+            'oops something went wrong'
+          </p>
         </div>
       </div>
     </div>
   </div>
-</section>
+</div>

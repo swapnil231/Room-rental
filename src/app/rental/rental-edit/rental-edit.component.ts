@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { AuthService } from 'src/app/auth/shared/service/auth.service';
@@ -10,10 +10,7 @@ import { RentalistingService } from 'src/app/shared/rentalisting.service';
   templateUrl: './rental-edit.component.html',
   styleUrls: ['./rental-edit.component.scss'],
 })
-export class RentalEditComponent {
-  methodistrue($event: any) {
-    this.istrue = $event;
-  }
+export class RentalEditComponent implements OnInit {
   param = '';
   msg: any;
   bgColor = 'pink';
@@ -39,7 +36,6 @@ export class RentalEditComponent {
       this.param = params['rentalId'];
       this.rental_service.getrentaldetails(this.param).subscribe((res) => {
         this.rental = res;
-        console.log(this.rental);
       });
     });
     this.auth = this.authservuce.isauthenticated;
@@ -54,8 +50,6 @@ export class RentalEditComponent {
     this.rental_service.updaterentals(this.rental._id, data).subscribe({
       next: (res: any) => {
         this.rental = res;
-        console.log(res, 'res2');
-        // this.getactivatedrouteId();
         notifier(null);
       },
       error: (err) => {
@@ -67,7 +61,10 @@ export class RentalEditComponent {
 
   convertStringtoNumber(assets: any) {
     const { numOfRooms } = this.rental;
-
     return parseInt(<any>numOfRooms, 10) + assets;
+  }
+
+  methodistrue($event: any) {
+    this.istrue = $event;
   }
 }

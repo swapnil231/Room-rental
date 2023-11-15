@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { RentalModule } from './rental/rental.module';
 import { SharedModule } from './shared/shared.module';
 import { FormsModule } from '@angular/forms';
-import { Auth2Module } from './auth2/auth2.module';
+
 import { AuthModule } from './auth/auth.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './auth/shared/interceptor/token.interceptor';
@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { ManageModule } from './manage/manage.module';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,12 +24,13 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     RentalModule,
     SharedModule,
     FormsModule,
-    Auth2Module,
+
     AuthModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     ManageModule,
     ImageCropperModule,
+    CarouselModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

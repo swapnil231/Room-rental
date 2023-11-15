@@ -2,7 +2,7 @@ import { Rental } from 'src/app/shared/rental-modal';
 import { RegisterForm } from '../../RegisterForm';
 
 export class bookingModel {
-  _id!: Number;
+  _id!: number;
   startAt!: string;
   endAt!: string;
   price!: number;
@@ -11,5 +11,4 @@ export class bookingModel {
   rental!: Rental;
   user!: RegisterForm;
   createdAt?: string;
-  // rentaldailyprice?: number;
 }

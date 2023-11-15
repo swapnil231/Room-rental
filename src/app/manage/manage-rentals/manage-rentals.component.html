@@ -1,29 +1,38 @@
-<!-- <p>manage-rentals works!</p> -->
+<!-- ///////////////////////////////////////////////// -->
+<div class="container-xxl py-5">
+  <div class="container">
 
-
-<div class="bwm-list-page">
-  <h1>your rentals</h1>
-  <div class="container text-center">
-
-    <p *ngIf="rental.length === 0 && !isFetching" class="alert alert-warning">
-      No rentals found
-    </p>
-
-
-    <!-- </div> -->
-
-    <div class="row">
-      <div class="col-md-3 col-xs-12" *ngFor="let el of rental ">
-        <app-cards [rentalsend]="el"></app-cards>
-
-        <div class="d-inline-flex">
-
-          <button class="btn btn-danger" (click)="deleterental(el._id)">delete</button>
-
-          <button class="btn btn-primary " (click)="Edit(el._id)">Edit</button>
-
+    <div class="notfound-section d-flex justify-content-center align-items-center"
+      *ngIf="rental?.length === 0 && !isFetching">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="text-content">
+              <h1 style="color: white;">
+                Sorry! No result found
+              </h1>
+              <p style="color: white; font-size: medium;">we are sorry what you were looking for.Please try another way.
+              </p>
+              <a class="btn btn-warning btn-lg" routerLink="/rental/new">Creat Rental</a>
+            </div>
+          </div>
         </div>
+      </div>
+    </div>
 
+    <div class="tab-content" *ngIf="rental?.length !== 0 && isFetching">
+      <div id="tab-1" class="tab-pane fade show p-0 active">
+        <div class="row g-4">
+          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s" *ngFor="let el of rental ">
+            <app-cards [rentalsend]="el"></app-cards>
+
+            <div class="row weapperow m-1">
+              <button class="col m-1 btn btn-danger" (click)="deleterental(el._id)">delete</button>
+              <button class="col m-1 btn btn-primary" (click)="Edit(el._id)">Edit</button>
+            </div>
+
+          </div>
+        </div>
       </div>
 
     </div>

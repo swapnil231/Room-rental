@@ -1,30 +1,24 @@
 <div class="mt-1">
+
   <label class="image-upload-container btn bwm-btn-main">
     <span>Select Image</span>
     <input #fileInput type="file" accept="image/*" (change)="OnImageLoad($event)">
   </label>
 
-
-
   <div *ngIf="selectedImage && fileInput.value &&isImagePreview" class="img-preview-container">
     <div class="img-preview">
-      <img [src]="selectedImage.src" [ngClass]="selectedImage.status==='PENDING'?'blur':''">
+      <img [src]="selectedImage.src" alt="" [ngClass]="selectedImage.status==='PENDING'?'blur':''">
       <div *ngIf="selectedImage?.status === 'PENDING'  && fileInput.value" class="spinner-container">
         <app-spinner></app-spinner>
       </div>
-
     </div>
-
   </div>
 
-
-
-
-  <div *ngIf="selectedImage?.status === 'UPLOADED' && fileInput.value" class="alert alert-success mt-2">
-    Image has been uploaded succesfuly!
+  <div *ngIf="selectedImage?.status === 'UPLOADED' && fileInput.value" class="alert alert-success mt-2"> Image has been
+    uploaded succesfuly!
   </div>
-  <div *ngIf="selectedImage?.status === 'ERROR' && fileInput.value" class="alert alert-danger mt-2">
-    Image uploade failed!
+  <div *ngIf="selectedImage?.status === 'ERROR' && fileInput.value" class="alert alert-danger mt-2"> Image uploade
+    failed!
   </div>
 
 

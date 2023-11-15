@@ -13,11 +13,7 @@ import { RentalNewComponent } from './rental-new/rental-new.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RentalBookingComponent } from './rental-booking/rental-booking.component';
 
-import {
-  DateAdapter,
-  MAT_DATE_LOCALE,
-  MatNativeDateModule,
-} from '@angular/material/core';
+import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -30,6 +26,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { RentalHomesComponent } from './rental-homes/rental-homes.component';
 import { RentalEditComponent } from './rental-edit/rental-edit.component';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 @NgModule({
   declarations: [
@@ -60,6 +57,7 @@ import { RentalEditComponent } from './rental-edit/rental-edit.component';
     MatMomentDateModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    CarouselModule,
   ],
   exports: [RentalDetailsComponent, RentalListingComponent, RentalccComponent],
 })

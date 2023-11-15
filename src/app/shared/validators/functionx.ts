@@ -10,7 +10,7 @@ import {
   providedIn: 'root',
 })
 export class Customvalidators {
-  forbiddenEmailValidator(email: String): ValidatorFn {
+  forbiddenEmailValidator(email: string): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
       const forbidden = control.value === email;
       return forbidden ? { forbiddenEmail: { value: control.value } } : null;

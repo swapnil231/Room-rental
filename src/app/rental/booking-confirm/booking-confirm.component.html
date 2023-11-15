@@ -1,31 +1,30 @@
-<section class="modalx">
-  <div class="header">
-    <h4 class="modalx-title">Confirm Booking <p>{{bookingdata.startAt}} to {{bookingdata.endAt}}</p>
-    </h4>
-    <!-- <button type="button" class="close" aria-label="Close" (click)="confirmationModal.close()">
-  </button> -->
+<div class="modalx">
 
+  <div class="header text-center">
+    <h2 class="modalx-title">Booking Dates <p>{{bookingdata.startAt}} to
+        {{bookingdata.endAt}}</p>
+    </h2>
   </div>
-  <hr style="color: red;">
-  <div class="modal-body">
-    <em>{{bookingdata.nights}}</em> nights /
+
+  <hr style="color:white;">
+
+  <div class="modal-body text-center">
+    <em style="color:yellow;font-size: x-large;">{{bookingdata.nights}} nights</em>/
     <!-- Nightly Price -->
     <em>${{bookingdata.rental.dailyPrice}}</em> per Night
     <!-- Guests -->
     <p>Guests: <em>{{bookingdata.guests}}</em></p>
     <!-- Total Price -->
-    <p>Price: <em>${{bookingdata.price}}</em></p>
+    <p>Price: <em style="color:yellow; font-size:x-large;">${{bookingdata.price}}</em></p>
     <p>Do you confirm booking for selected days?</p>
   </div>
-  <!-- <div *ngIf="errors" class="alert alert-danger modal-error">
-    <p>
-      {{errors}}
-    </p>
-  </div> -->
-  <hr style="color: red;">
+
+  <hr style="color: white;">
+
   <div class="modal-footer">
-    <button type="button" class="btn bwm-btn-main" (click)="confirmbooking()">Confirm</button>
-    <button type="button" class="btn bwm-btn-main2 m-lg-2" (click)="close()">Close
+    <button type="button" class="btn btn-primary" (click)="confirmbooking()">Confirm</button>
+    <button type="button" class="btn btn-warning m-lg-2" (click)="close()">Close
     </button>
   </div>
-</section>
+
+</div>

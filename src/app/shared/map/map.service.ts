@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import {
   Observable,
   catchError,
-  filter,
   map,
   of as observableof,
   throwError,
@@ -30,8 +29,6 @@ interface geoposition {
 })
 export class MapService {
   constructor(private http: HttpClient) {}
-  // private readonly API_Key = 'cTF6he8cYca92h5UVAUMoGYYtAzReW8t';
-
   private locationCache: any = {};
 
   getGeoposition(location: string, API_Key: string): Observable<geoposition> {
@@ -118,7 +115,6 @@ export class MapService {
   private cachelocation(location: string, position: any) {
     const locationKey = this.removeSpaceAndtoLowercase(location);
     this.locationCache[locationKey] = position;
-    console.log(this.locationCache);
   }
 
   private removeSpaceAndtoLowercase(location: string) {
@@ -140,20 +136,3 @@ export class MapService {
     this.removeElementbyClass('my-class');
   }
 }
-
-// pipe for data transform
-// .pipe(
-//   map((res) => {
-//     const results = res.results;
-//     let x = results.filter((el) => {
-//       return el.type === 'Geography';
-//     });
-//     console.log(x);
-//     let y: any = [];
-//     x.forEach((el) => {
-//       y.push({ date: el.score, avgtemp_c: el.entityType });
-//     });
-
-//     return y;
-
-//   })

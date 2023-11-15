@@ -19,10 +19,6 @@ export class EditableComponent implements OnInit {
   @Input() htmltagtype: any;
   @Input() option!: any[];
   @Input() rental!: Rental;
-  // entityfield: any;
-  // @Input('yu').set field(entityfield: string) {
-  //   this.entityfield = entityfield;
-  // }
   @Input() field: any;
   @Input() classname: any;
 
@@ -36,7 +32,6 @@ export class EditableComponent implements OnInit {
 
   entityupdate() {
     if (this.getentityvalue !== this.theoriginalentity) {
-      console.log(this.entityupdate);
       this.entityupdated.emit({
         data: { [this.field]: this.getentityvalue },
         notifier: this.inputNotifier,
@@ -46,10 +41,7 @@ export class EditableComponent implements OnInit {
 
   inputNotifier = (error: any) => {
     if (error) {
-      console.log(error);
-
       this.cancle();
-
       return;
     }
     this.setorignalvalue();

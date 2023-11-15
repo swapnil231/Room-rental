@@ -1,5 +1,6 @@
 
-
+/* eslint-env es6 */
+/* eslint-disable no-console */
 const {rentals,users,images} = require('./data/data');
 const Rental = require('../models/rental');
 const usersmodel=require('../models/users')

@@ -28,14 +28,12 @@ export class BookingConfirmComponent implements OnInit {
   ) {}
 
   @ViewChild('resetvar') resetvar!: ElementRef;
-  // resetvarx!: ElementRef;
   bookingdata!: bookingModel;
 
   ngOnInit(): void {
     this.rentalservice.cast.subscribe((res) => {
       this.bookingdata = res;
     });
-    // this.errors = null;
   }
 
   close() {
@@ -48,27 +46,22 @@ export class BookingConfirmComponent implements OnInit {
     this.bookingservice.creatbooking(this.bookingdata).subscribe({
       next: (res: any) => {
         if (res && res.message === 'booking created') {
-          // alert(res.message);
-          // console.log(res);
-
           this.matdilog.closeAll();
           this.bookingdata.guests = 1;
           this.resetdate();
           this.showSuccess();
+          this.router.navigate(['/manage/bookings']);
         }
       },
       error: (err) => {
-        console.log(err);
         this.errors = err.error.errors[0].detail;
-        console.log(this.errors);
-
         alert(err.error.errors[0].detail);
       },
     });
   }
 
   resetdate() {
-    let x = document.querySelector<HTMLElement>('.mybtn')?.click();
+    const x = document.querySelector<HTMLElement>('.mybtn')?.click();
   }
 
   showSuccess() {
@@ -78,18 +71,3 @@ export class BookingConfirmComponent implements OnInit {
     });
   }
 }
-
-// how click on dom element
-
-//    approch1
-// // @ViewChild('resetvar') resetvar!: ElementRef;
-// // let event = new MouseEvent('click', { bubbles: true });
-//     //his.resetvarx.nativeElement.dispatchEvent(event);
-
-// approch render2
-// / this.render2.listen(this.resetvar.nativeElement, 'click', (event) => {
-//   //   console.log('clicked');
-//   // });
-
-// approch3
-// let x = document.querySelector<HTMLElement>('.mybtn')?.click();

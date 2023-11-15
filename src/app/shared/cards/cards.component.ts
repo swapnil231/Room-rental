@@ -1,19 +1,19 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Rental } from '../rental-modal';
-import { Router } from '@angular/router';
-import { RentalistingService } from '../rentalisting.service';
 
 @Component({
   selector: 'app-cards',
   templateUrl: './cards.component.html',
   styleUrls: ['./cards.component.scss'],
 })
-export class CardsComponent implements OnInit {
-  ngOnInit(): void {}
-
+export class CardsComponent {
   @Input() rentalsend!: Rental;
 
   data = 100;
 
-  onsend() {}
+  convertStringtoNumber(assets: any) {
+    const { numOfRooms } = this.rentalsend;
+
+    return parseInt(<any>numOfRooms, 10) + assets;
+  }
 }

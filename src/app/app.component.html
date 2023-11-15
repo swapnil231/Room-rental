@@ -1,64 +1,66 @@
-<!-- oo
-<button (click)="onadd()">add</button>
-{{number}}
-<button (click)="onmin()">add</button> -->
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" routerLink="/">BookwithMe</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <form class="d-flex me-auto " role="search">
-        <input #cityvalue (keyup.enter)="serchcity(cityvalue.value)" class="form-control me-2 bwm-serch" type="search"
-          placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-primary bwm-btn-main" type="submit"
-          (click)="serchcity(cityvalue.value)">Search</button>
-      </form>
-      <ul class="navbar-nav  mb-2 mb-lg-0 mynavbar">
-        <li class="nav-item">
-          <a class="nav-link active" routerLink="/" aria-current="page">Home</a>
-        </li>
-        <li *ngIf="authstatus" class="nav-item">
-          <a class="nav-link" aria-current="page">hellow..{{username}}</a>
-        </li>
+<!-- ////////////////////////////////////////////////////////////////////////// -->
 
-        <li class="nav-item dropdown" *ngIf="authstatus else notauthmenu">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            manage
-          </a>
-          <ul class="dropdown-menu mr-6">
-            <li><a class="dropdown-item" routerLink="/rental/new">creat rental</a></li>
-            <li><a class="dropdown-item" routerLink="/manage/rentals">My Rental</a></li>
-            <li><a class="dropdown-item" routerLink="/manage/bookings">My bookings</a></li>
-            <li><a class="dropdown-item" [queryParams]="{type:'received'}" routerLink="/manage/bookings">Recived
-                Bookings</a></li>
-            <li>
+<!-- Navbar Start -->
+<div class="container-xxl bg-white p-0">
+  <div class="container-fluid nav-bar bg-transparent">
+    <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
+
+      <a routerLink="/" class="navbar-brand d-flex align-items-center text-center">
+        <div class="icon p-1 me-2">
+          <img class="img-fluid" src="/assets/images/Red_and_Black_Modern_Home_Logo-removebg-preview.png" alt="Icon"
+            style="width: 50px; height: 50px;">
+        </div>
+        <h3 class="m-0 headerspan">BookwithMe</h3>
+      </a>
+
+      <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <form class="d-flex me-auto CustonForm" role="search">
+          <input #cityvalue (keyup.enter)="serchcity(cityvalue.value)" class="form-control me-2 bwm-serch" type="search"
+            [placeholder]="placevalue" aria-label="Search">
+          <button class="btn bwm-btn-simple" type="submit" (click)="serchcity(cityvalue.value)">Search</button>
+        </form>
+
+        <div class="navbar-nav ms-auto">
+          <a class="nav-item nav-link" routerLink="/">Home</a>
+          <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Property</a>
+            <div class="dropdown-menu rounded-0 m-0">
+              <a href="#Property-List" class="dropdown-item mylink">Property List</a>
+              <a href="#Property-Agent" class="dropdown-item mylink">Property Agent</a>
+              <a href="#Testimonials" class="dropdown-item mylink">Testimonials</a>
+              <a href="#About-us" class="dropdown-item mylink">About us</a>
+            </div>
+          </div>
+          <div class="nav-item dropdown" id="UserDropdown" *ngIf="authstatus else notauthmenu">
+            <a class="btn bwm-btn-simple mt-lg-3 mt-sm-1" data-bs-toggle="dropdown"><i class="lni lni-user"></i><span
+                class="m-lg-2">Hi..{{username}}</span></a>
+
+            <div class="dropdown-menu rounded-0 m-0">
+              <a class="dropdown-item mylink" routerLink="/rental/new">Creat New Rental</a>
+              <a class="dropdown-item mylink" routerLink="/manage/rentals">My Rental</a>
+              <a class="dropdown-item mylink" routerLink="/manage/bookings">My bookings</a>
+              <a class="dropdown-item mylink" [queryParams]="{type:'received'}"
+                routerLink="/manage/bookings">RecivedBookings</a>
               <a class="dropdown-item" routerLink="/" (click)="logout()">logout</a>
-            </li>
-          </ul>
-        </li>
+            </div>
+
+          </div>
 
 
-        <ng-template #notauthmenu>
+          <ng-template #notauthmenu>
+            <a class="nav-link mylink" aria-current="page" routerLink="login">login</a>
+            <a class="nav-link mylink" routerLink="register">Register</a>
+          </ng-template>
 
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="login">login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="register">register</a>
-          </li>
-        </ng-template>
-
-
-        <!-- <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-        </li> -->
-      </ul>
-
-    </div>
+        </div>
+      </div>
+    </nav>
   </div>
-</nav>
 
-<router-outlet></router-outlet>
+  <!-- Navbar End -->
+  <router-outlet></router-outlet>
+</div>

@@ -1,18 +1,8 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  Input,
-  OnChanges,
-  OnInit,
-  Renderer2,
-  SimpleChanges,
-  ViewChild,
-} from '@angular/core';
+import { Component, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 
 import { DateAdapter } from '@angular/material/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { MatInput } from '@angular/material/input';
+import { MatDialog } from '@angular/material/dialog';
+
 // import * as moment from 'moment';
 import { Moment } from 'moment';
 import * as moment from 'moment';
@@ -52,7 +42,6 @@ export class RentalBookingComponent implements OnInit {
   ngOnInit(): void {
     this.initbooking();
     this.getbooking();
-    // this.checkifdatesareValid;
   }
 
   madeBookings: any[] = [];
@@ -79,21 +68,15 @@ export class RentalBookingComponent implements OnInit {
 
   OnDateChange(event: any) {
     const x = event.target.value;
-    // console.log(event.target.value);
     this.startDate = moment(x).format('YYYY-MM-DD');
-    // console.log(myDate);
-    console.log(this.startDate);
   }
-  OnDateChange2(event: any) {
-    // console.log(event.target.value);
 
+  OnDateChange2(event: any) {
     const y = event.target.value;
-    // console.log(event.target.value);
     this.endDate = moment(y).format('YYYY-MM-DD');
     if (this.endDate === 'Invalid date') {
       return;
     }
-    console.log(this.endDate);
   }
 
   updatebooking() {
@@ -115,11 +98,8 @@ export class RentalBookingComponent implements OnInit {
     this.newbooking.nights = this.calculatenight;
     this.newbooking.guests;
     this.newbooking.price = this.rental.dailyPrice * this.newbooking.nights;
-
     this.newbooking.rental = { ...this.rental };
     this.rentalservice.sendbookingdata(this.newbooking);
-
-    console.log(this.newbooking.startAt, 'kkkk');
     this.openDialog('', '');
   }
 
@@ -132,8 +112,8 @@ export class RentalBookingComponent implements OnInit {
   }
 
   get momentConvertedDates() {
-    let dateOne = moment(this.startDate);
-    let dateTwo = moment(this.endDate);
+    const dateOne = moment(this.startDate);
+    const dateTwo = moment(this.endDate);
     return { dateOne, dateTwo };
   }
 
@@ -150,8 +130,10 @@ export class RentalBookingComponent implements OnInit {
     exitAnimationDuration: string
   ): void {
     this.dialog.open(BookingConfirmComponent, {
-      width: '360px',
+      panelClass: 'custom-dialog-container',
       height: 'auto',
+      width: '400px',
+
       enterAnimationDuration,
       exitAnimationDuration,
     });
@@ -166,7 +148,7 @@ export class RentalBookingComponent implements OnInit {
   }
 
   calcRangeDatesUsingMoment(startAt: string, endAt: string): string[] | any {
-    let dates: string[] = [];
+    const dates: string[] = [];
 
     let mStartAt = moment(startAt);
     const mEndAt = moment(endAt);
@@ -189,19 +171,4 @@ export class RentalBookingComponent implements OnInit {
       return true;
     }
   };
-
-  // sat/sun filter using movment
-
-  // myDateFilter = (m: Moment | null): boolean => {
-  //   const day = (m || moment()).day();
-  //   return day !== 0 && day !== 6;
-  // };
-
-  // sat/sun filter
-  // myFilter = (d: Date | null): boolean => {
-  //   const day = (d || new Date()).getDay();
-  //   // Prevent Saturday and Sunday from being selected.
-  //   console.log('hi');
-  //   return day !== 0 && day !== 6;
-  // };
 }

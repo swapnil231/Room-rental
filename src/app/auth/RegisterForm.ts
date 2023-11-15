@@ -1,8 +1,8 @@
 export class RegisterForm {
-  username: string = '';
-  email: string = '';
-  password: string = '';
-  conformPassword: string = '';
+  username = '';
+  email = '';
+  password = '';
+  conformPassword = '';
 }
 
 export class LoginForm {

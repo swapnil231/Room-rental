@@ -28,14 +28,13 @@ const routes: Routes = [
         canActivate: [authguardGuard],
       },
       {
-        path: ':rentalid',
+        path: ':rentalid/id',
         component: RentalDetailsComponent,
       },
       {
         path: ':rentalId/edit',
         component: RentalEditComponent,
         canActivate: [authguardGuard, rentalGuard],
-        // canDeactivate: [rentalGuard],
       },
 
       {
@@ -48,12 +47,6 @@ const routes: Routes = [
         component: RentalListingComponent,
         pathMatch: 'full',
       },
-
-      // {
-      //   path: '**',
-      //   component: RentalListingComponent,
-      //   pathMatch: 'full',
-      // },
     ],
   },
 ];

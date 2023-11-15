@@ -6,7 +6,7 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Rental } from 'src/app/shared/rental-modal';
+import { ToastrService } from 'ngx-toastr';
 
 import { RentalistingService } from 'src/app/shared/rentalisting.service';
 
@@ -17,18 +17,16 @@ import { RentalistingService } from 'src/app/shared/rentalisting.service';
 })
 export class RentalNewComponent implements OnInit, OnDestroy {
   rentalCategories = ['apartment', 'condo', 'house'];
-
   creatrental!: FormGroup;
-  // creatrental=new Rental()
   errorx: any;
-
   sucessMessage: any;
   timeout: any;
 
   constructor(
     private fb: FormBuilder,
     private rentalservice: RentalistingService,
-    private router_: Router
+    private router_: Router,
+    private toastr: ToastrService
   ) {}
   ngOnDestroy(): void {
     this.timeout && clearTimeout(this.timeout);
@@ -41,16 +39,13 @@ export class RentalNewComponent implements OnInit, OnDestroy {
   forminit() {
     this.creatrental = this.fb.group({
       title: ['', [Validators.required, Validators.maxLength(20)]],
-
       city: ['', [Validators.required, Validators.maxLength(10)]],
       street: ['', [Validators.required, Validators.maxLength(20)]],
       category: ['apartment'],
       image: ['', [Validators.required]],
-
-      numOfRooms: ['', [Validators.required, Validators.maxLength(50)]],
+      numOfRooms: ['', [Validators.required]],
       dailyPrice: ['', [Validators.required]],
-      description: ['', [Validators.required], Validators.maxLength(50)],
-
+      description: ['', [Validators.required, Validators.maxLength(50)]],
       shared: [''],
     });
   }
@@ -94,19 +89,16 @@ export class RentalNewComponent implements OnInit, OnDestroy {
     this.rentalservice.creatrentals(this.creatrental.value).subscribe({
       next: (res) => {
         if (Object.keys(res).length !== 0) {
-          console.log(res);
           this.sucessMessage = 'rental creted sucessfully';
+          this.showSuccess('rental creted sucessfully', 'sucess');
           this.timeout = setTimeout(() => {
             this.router_.navigate(['/rental']);
           }, 700);
         }
-        console.log(res);
       },
       error: (err) => {
-        console.log(err, 'hiiii');
         this.errorx = err.error.errors[0].detail;
-
-        alert(JSON.stringify(err));
+        this.showSuccess(this.errorx, 'Failed!');
       },
     });
   }
@@ -115,5 +107,12 @@ export class RentalNewComponent implements OnInit, OnDestroy {
     console.log(imageId);
     this.creatrental.controls['image'].setValue(imageId);
     console.log(this.creatrental.controls['image'].value);
+  }
+
+  showSuccess(msg: string, title: string) {
+    this.toastr.success(msg, title, {
+      timeOut: 3000,
+      closeButton: true,
+    });
   }
 }

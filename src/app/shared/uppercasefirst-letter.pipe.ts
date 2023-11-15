@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'uppercasefirstLetter',
 })
 export class UppercasefirstLetterPipe implements PipeTransform {
-  transform(value: unknown, ...args: unknown[]): unknown {
+  transform(value: unknown): unknown {
     if (!value || typeof value !== 'string') {
       return '';
     } else

@@ -1,7 +1,6 @@
-import { AfterViewInit, Directive, Input } from '@angular/core';
+import { Directive, Input } from '@angular/core';
 import { Validator, NG_VALIDATORS, AbstractControl } from '@angular/forms';
 import { Customvalidators } from '../validators/functionx';
-import { ChangeDetectorRef } from '@angular/core';
 
 @Directive({
   selector: '[appForbiddenemail]',

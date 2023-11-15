@@ -6,26 +6,27 @@ import {
   Validators,
 } from '@angular/forms';
 import { Customvalidators } from 'src/app/shared/validators/functionx';
-import { LoginForm } from '../RegisterForm';
+
 import { AuthService } from '../shared/service/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TimeoutConfig } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   emailPattern =
-    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   constructor(
     private fb: FormBuilder,
     private customvalidators: Customvalidators,
     private authservice: AuthService,
     private activatedRoutes: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
   ngOnDestroy(): void {
     this.clearnotifytimeout && clearTimeout(this.clearnotifytimeout);
@@ -104,11 +105,13 @@ export class LoginComponent implements OnInit {
         }
         this.loginform.reset();
         this.loginMessage = 'login sucessfully';
+        this.showSuccess('login sucessfull', 'sucess');
         // this.loginmsg();
       },
 
       error: (err) => {
         this.errror = JSON.stringify(err.error.errors[0].detail);
+        this.showSuccess(this.errror, 'Error');
 
         // alert(
         //   // JSON.stringify(err.error.errors[0].title) +
@@ -136,5 +139,12 @@ export class LoginComponent implements OnInit {
 
   get password(): AbstractControl | null {
     return this.loginform.get('password');
+  }
+
+  showSuccess(msg: string, title: string) {
+    this.toastr.success(msg, title, {
+      timeOut: 3000,
+      closeButton: true,
+    });
   }
 }

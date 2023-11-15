@@ -1,4 +1,5 @@
-
+/* eslint-env es6 */
+/* eslint-disable no-console */
 exports.provideMongoErrorHandler=(req,res,next)=>{
  res.sendApiError=config=>{
     const {status=422, title,detail}=config

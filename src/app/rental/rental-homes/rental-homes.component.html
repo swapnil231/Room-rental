@@ -1,13 +1,36 @@
-<!-- <p>rental-homes works! in city {{city}}</p> -->
-<div class="bwm-list-page">
-  <h1 class="title">Your home in "{{city | firstletter}}"</h1>
-  <p *ngIf="rentals.length === 0 && !isFetching" class="alert alert-warning">
-    No rentals found for your query.
-  </p>
-  <div class="row">
-    <div *ngFor="let rental of rentals" class="col-md-3 col-xs-12">
-      <app-cards [rentalsend]="rental">
-      </app-cards>
+<div class="container-xxl py-2">
+  <div class="container">
+    <h1 class="title" *ngIf="rentals?.length !== 0">Homes in "{{city | firstletter}}"</h1>
+
+    <div class="notfound-section d-flex justify-content-center align-items-center mt-4"
+      *ngIf="rentals?.length === 0 && !isFetching">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="text-content">
+              <h1 style="color: white;">
+                Sorry! No result found
+              </h1>
+              <p style="color: white; font-size: medium;">we are sorry what you were looking for.Please try another way.
+              </p>
+              <a class="btn btn-warning  btn-lg" routerLink="/rental">Home</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+
+
+    <div class="tab-content">
+      <div id="tab-1" class="tab-pane fade show p-0 active">
+        <div class="row g-4">
+          <div *ngFor="let rental of rentals" class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+            <app-cards [rentalsend]="rental">
+            </app-cards>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>

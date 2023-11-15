@@ -1,20 +1,13 @@
-<!-- <p>manage-bookings works!</p> -->
-
 <div [ngSwitch]="bookingType">
 
   <div *ngSwitchCase="bookingTypes.received">
-
     <app-booking-listing [title]="'Received Bookings'" [type]="bookingType"
       [getbookings]="getRecivedBookings"></app-booking-listing>
-
   </div>
-  <div *ngSwitchDefault>
 
+  <div *ngSwitchDefault>
     <app-booking-listing [title]="'My bookings'" [type]="bookingType"
       [getbookings]="getAuthuserBookings"></app-booking-listing>
-
   </div>
-
-
 
 </div>

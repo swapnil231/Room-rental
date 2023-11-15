@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { Action } from 'rxjs/internal/scheduler/Action';
-import { bookingModel } from 'src/app/auth/shared/bookingModel/bookingModel';
+
 import { BookingService } from 'src/app/rental/shared/service/booking.service';
 
 enum BOOKING_TYPES {

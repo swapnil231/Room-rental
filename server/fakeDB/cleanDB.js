@@ -1,3 +1,6 @@
+/* eslint-env es6 */
+/* eslint-disable no-console */
+
 const mongoose = require('mongoose');
 const config = require('../config/dev');
 const FakeDB = require('./fakdDB');
